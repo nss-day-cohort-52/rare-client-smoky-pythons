@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { PostsRepository } from "../../repositories/PostsRepository"
 import { Post } from "./Post"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export const PostList = () => {
     const [posts, setPosts] = useState([])
@@ -17,19 +17,25 @@ export const PostList = () => {
     }, [])
 
     return (
-        posts.map(post => {
-            // We still need to fetch users and categories from the 
-            const foundUser = users.find(user => user.id === post.userId)
-            const foundCategory = categories.find(category => category.id === post.categoryId)
+        <>
+            <div>
+                <center> <Link to="/newPost" className="navbar-item">New Post</Link></center>
+            </div>
+            {
+                posts.map(post => {
+                    // We still need to fetch users and categories from the 
+                    const foundUser = users.find(user => user.id === post.userId)
+                    const foundCategory = categories.find(category => category.id === post.categoryId)
 
-            return <Post
-            key={post.id}
-            title={post.title}
-            content={post.content}
-            publicationDate={post.publicationDate}
-            user={foundUser}
-            category={foundCategory}
-            />
-        })
+                    return <Post
+                        key={post.id}
+                        title={post.title}
+                        content={post.content}
+                        publicationDate={post.publicationDate}
+                        user={foundUser}
+                        category={foundCategory}
+                    />
+                })}
+        </>
     )
 }
