@@ -1,6 +1,7 @@
 import { PostList } from "./posts/PostList"
 import React from "react"
 import { Route } from "react-router-dom"
+import { PostForm} from "./posts/PostEntry"
 import { CategoryList } from "./categories/category_list"
 
 export const ApplicationViews = () => {
@@ -12,6 +13,9 @@ export const ApplicationViews = () => {
     </Route>
     <Route exact path="/posts">
         <PostList />
+    </Route>
+    <Route exact path="/newPost">
+        <PostForm />
     </Route>
     </>
   )
