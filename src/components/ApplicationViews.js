@@ -1,3 +1,4 @@
+import { PostList } from "./posts/PostList"
 import React from "react"
 import { Route } from "react-router-dom"
 import { CategoryList } from "./categories/category_list"
@@ -8,6 +9,9 @@ export const ApplicationViews = () => {
     <h1 >Welcome to Rare Publishing</h1>
     <Route exact path = "/categories">
       <CategoryList/>
+    </Route>
+    <Route exact path="/posts">
+        <PostList />
     </Route>
     </>
   )
