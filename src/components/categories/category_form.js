@@ -1,7 +1,6 @@
 import { useState } from "react"
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
-export const CategoryForm = ({setCategories}) => {
+export const CategoryForm = ({syncCategories}) => {
     const [category, modifyCategory] = useState({
         label: ""
     })
@@ -19,8 +18,11 @@ export const CategoryForm = ({setCategories}) => {
             body: JSON.stringify(newCategory)
         }
         return fetch(`http://localhost:8088/categories`, fetchOption)
-        .then(setCategories)
+        .then(syncCategories)
+        .then(modifyCategory(newCategory))
     }
+
+    // const emptyLabel = {label: ""}
 
     return (
         <>
@@ -28,7 +30,7 @@ export const CategoryForm = ({setCategories}) => {
             <h1>New Category</h1>
             <div className="description">
                     <label>Category Name: </label>
-                    <textarea
+                    <input
                         onChange={
                             (evt) => {
                                 const copy = { ...category }
@@ -40,7 +42,7 @@ export const CategoryForm = ({setCategories}) => {
                         type="text"
                         required autoFocus
                         className="input"
-                    ></textarea>
+                    ></input>
                 </div>
                 <button type="submit" className="form__submit"
                     onClick={

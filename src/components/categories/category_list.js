@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { getCategories } from "../../repositories/CategoriesRepository";
 import { CategoryForm } from "./category_form";
-import { getCategories } from "./category_manager";
 
 export const CategoryList = () => {
     const [categories, setCategories] = useState([])
-
-    useEffect(() => {
+    const syncCategories = () => {
         getCategories()
             .then(setCategories)
+    }
+
+    useEffect(() => {
+        syncCategories()
     },
         [])
 
@@ -18,7 +21,7 @@ export const CategoryList = () => {
                    return <p key={category.id}>{category.label}</p>
                 })
             }
-            <CategoryForm setCategories={setCategories}/>
+            <CategoryForm syncCategories={syncCategories}/>
         </>
     )
 }
