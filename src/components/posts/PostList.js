@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { PostsRepository } from "../../repositories/PostsRepository"
 import { Post } from "./Post"
+import {Link} from "react-router-dom"
 
 export const PostList = () => {
     const [posts, setPosts] = useState([])
