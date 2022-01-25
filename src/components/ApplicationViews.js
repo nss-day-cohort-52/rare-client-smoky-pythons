@@ -1,7 +1,6 @@
 import { PostList } from "./posts/PostList"
 import React from "react"
 import { Route } from "react-router-dom"
-import { PostList } from "./posts/PostList"
 import { PostForm} from "./posts/PostEntry"
 import { CategoryList } from "./categories/category_list"
 
