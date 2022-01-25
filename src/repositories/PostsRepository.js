@@ -1,4 +1,4 @@
-import { Settings } from "../components/utils/HumanDate"
+import { Settings } from "../components/utils/Settings"
 
 export const PostsRepository = {
     async getAll() {
