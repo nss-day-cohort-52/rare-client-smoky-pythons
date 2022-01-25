@@ -36,8 +36,8 @@ export const NavBar = ({ token, setToken }) => {
               :
               ""
           }
+          
         </div>
-
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
