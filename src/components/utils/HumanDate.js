@@ -8,3 +8,7 @@ export const HumanDate = ({ date }) => {
       timeZone: 'America/Chicago'
     })
 }
+
+export const Settings = {
+  remoteURL: "http://localhost:8088"
+}
