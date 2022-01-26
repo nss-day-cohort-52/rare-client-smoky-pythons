@@ -9,10 +9,10 @@ export const PostList = ({ posts, syncPosts }) => {
 
     return (
         <>
-            <table className="table">
               <div>
                 <center> <Link to="/newPost" className="navbar-item">New Post</Link></center>
               </div>
+            <table className="table">
                 <thead>
                     <tr>
                         <th>Title</th>

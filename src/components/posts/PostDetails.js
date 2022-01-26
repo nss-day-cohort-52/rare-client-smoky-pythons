@@ -1,7 +1,10 @@
+import { useHistory } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import "./PostDetails.css"
+
 export const PostDetails = ({ posts, syncPosts }) => {
     const { postId } = useParams()
+    const history = useHistory()
 
     const foundPost = posts.find(p => p.id === parseInt(postId))
 
@@ -11,7 +14,7 @@ export const PostDetails = ({ posts, syncPosts }) => {
             <h2 className="subtitle post-title">{foundPost?.title}</h2>
             <div className="author-and-tags">
                 <div>Author goes here</div>
-                <button className="button">View comments</button>
+                <button onClick={() => history.push(`${postId}/comments`)} className="button">View comments</button>
                 <div className="tags-container">
                     {/* Here we can map over all the tags tied to this specific post */}
                     <div>Tags go here</div>
