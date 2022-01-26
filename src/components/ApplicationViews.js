@@ -1,10 +1,8 @@
-import { PostList } from "./posts/PostList"
 import React from "react"
 import { Route } from "react-router-dom"
-import { PostForm} from "./posts/PostEntry"
 import { CategoryList } from "./categories/category_list"
-import { PostDetails } from "./posts/PostDetails"
 import { PostRoutes } from "./PostRoutes"
+import { TagList } from "./tags/tag_list"
 
 export const ApplicationViews = () => {
   return (
