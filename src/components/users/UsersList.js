@@ -1,6 +1,7 @@
-import React, { useState,useEffect } from "react"
-import {get_all_users} from "../../repositories/UserRepository"
+import { useState,useEffect } from "react"
+import {get_all_users,get_single_user} from "../../repositories/UserRepository"
 import { useHistory } from "react-router-dom"
+import {Link} from "react-router-dom"
 
 export const UsersList = () => {
     const [users, setUsers] = useState([])
@@ -21,7 +22,9 @@ export const UsersList = () => {
                 {
                     users.map(user => {
                         return <section className="user" key={user.id}>
-                                <h3>{user.username}</h3>
+                                <Link to={`/users/${user.id}`} >
+                                   <h3>{user.username}</h3>
+                                </Link>
                         </section>
                     })
                 }

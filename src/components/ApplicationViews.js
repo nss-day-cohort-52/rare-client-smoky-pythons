@@ -1,8 +1,8 @@
 import React from "react"
 import { Route } from "react-router-dom"
 import { CategoryList } from "./categories/category_list"
-
 import { UsersList } from "./users/UsersList"
+import { UserDetails } from "./users/UserDetails"
 import { PostRoutes } from "./PostRoutes"
 import { TagList } from "./tags/tag_list"
 
@@ -17,6 +17,10 @@ export const ApplicationViews = () => {
     <Route exact path = "/users">
       <UsersList/>
     </Route>
+    <Route path = "/users/:user_id(\d+)">
+      <UserDetails/>
+    </Route>
+
 
     <PostRoutes />
 
