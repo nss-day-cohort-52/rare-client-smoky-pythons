@@ -1,0 +1,10 @@
+.subtitle {
+    text-align: center;
+}
+.author-and-tags {
+    display: flex;
+    justify-content: space-between;
+}
+.post-category {
+    float: right;
+}

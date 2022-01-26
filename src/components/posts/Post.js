@@ -1,24 +1,17 @@
-import { useState } from "react"
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import "./Post.css"
 
 export const Post = (props) => {
-    const [posts, setPosts] = useState([])
-
+    const history = useHistory()
     return (
-        <div className="card">
-            <header className="card-header">
-                <p className="card-header-title">
-                    {props.title}
-                </p>
-            </header>
-            <div className="card-content">
-                <div className="content">
-                    {props.content}
-                </div>
-            </div>
-            <footer className="card-footer">
-                <a href="#" className="card-footer-item">Edit</a>
-                <a href="#" className="card-footer-item">Delete</a>
-            </footer>
-        </div>
+        <tbody>
+            <tr>
+                <td id="titleLink" onClick={() => history.push(`/posts/${props.id}`)}>{props.title}</td>
+                <td>{props.user?.firstName} {props.user?.lastName}</td>
+                <td>{props.publicationDate}</td>
+                <td>{props.category}</td>
+                <td>tags go here</td>
+            </tr>
+        </tbody>
     )
 }
