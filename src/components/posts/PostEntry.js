@@ -21,7 +21,7 @@ export const PostForm = () => {
             user_id: parseInt(localStorage.getItem("token")),
             category_id: parseInt(post.category_id),
             title: post.title,
-            publication_date: post.timestamp,
+            publication_date: new Date(),
             content: post.content,
         }
         const fetchOption = {
