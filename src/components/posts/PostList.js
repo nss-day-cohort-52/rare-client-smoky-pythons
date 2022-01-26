@@ -6,6 +6,16 @@ import { Link } from "react-router-dom"
 export const PostList = ({ posts, syncPosts }) => {
     const [users, setUsers] = useState([])
     const [categories, setCategories] = useState([])
+   
+
+    const delete_post = (id) => {
+        fetch(`http://localhost:8088/posts/${id}`, { method: 'DELETE'})
+            .then(res => res.json())
+            .then(() => {
+                history.push("/posts")
+            })
+        }
+        
 
     return (
         <>
@@ -28,7 +38,7 @@ export const PostList = ({ posts, syncPosts }) => {
                         const foundUser = users.find(user => user.id === post.userId)
                         const foundCategory = categories.find(category => category.id === post.categoryId)
 
-                        return <Post
+                        return <div><Post
                             key={post.id}
                             id={post.id}
                             title={post.title}
@@ -37,9 +47,10 @@ export const PostList = ({ posts, syncPosts }) => {
                             user={foundUser}
                             category={foundCategory}
                             syncPosts={syncPosts}
-                        />
+                            
+                        /> <button onClick={() => delete_post(post.id)}>Delete</button></div>
                     })
-                }
+                } 
             </table>
         </>
     )
