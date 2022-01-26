@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { Post } from "./Post"
+import { Link } from "react-router-dom"
+
 
 export const PostList = ({ posts, syncPosts }) => {
     const [users, setUsers] = useState([])
@@ -8,6 +10,9 @@ export const PostList = ({ posts, syncPosts }) => {
     return (
         <>
             <table className="table">
+              <div>
+                <center> <Link to="/newPost" className="navbar-item">New Post</Link></center>
+              </div>
                 <thead>
                     <tr>
                         <th>Title</th>
