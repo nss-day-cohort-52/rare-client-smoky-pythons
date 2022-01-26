@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useHistory } from "react-router-dom"
 
 export const PostForm = () => {
-
+    const [category, updateCategories] = useState([])
     const [post, createPost] = useState({ // Declaring State variable
         user_id: "",
-        category_id: "",
+        category_id: 0,
         title: "",
         publication_date: "",
         content: "",
@@ -19,9 +19,9 @@ export const PostForm = () => {
 
         const newPost = {
             user_id: parseInt(localStorage.getItem("token")),
-            category_id: post.category_id,
+            category_id: parseInt(post.category_id),
             title: post.title,
-            publication_date: post.timestamp,
+            publication_date: new Date(),
             content: post.content,
         }
         const fetchOption = {
@@ -38,6 +38,16 @@ export const PostForm = () => {
             })
     }
 
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/categories`)
+                .then(res => res.json())
+                .then((data) => {
+                    updateCategories(data)
+                })
+        }, []
+    )
+
 
     return (
         <form className="requestForm">
@@ -48,26 +58,26 @@ export const PostForm = () => {
                 <div className="form-group">
                     <label htmlFor="postTitle">Title:</label>
                     <input className="input" type="text" placeholder="Enter your title here"
-                    onChange= {
-                        (evt) => {
-                            const copy = {...post}
-                            copy.title = evt.target.value
-                            createPost(copy)
-                        }
-                    }></input>
+                        onChange={
+                            (evt) => {
+                                const copy = { ...post }
+                                copy.title = evt.target.value
+                                createPost(copy)
+                            }
+                        }></input>
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="content">Content:</label>
                     <textarea className="textarea" placeholder="Enter Content Here"
-                    onChange={
-                        (evt) => {
-                            const copy = {...post}
-                            copy.content = evt.target.value
-                            createPost(copy)
-                        }
-                    }></textarea>
+                        onChange={
+                            (evt) => {
+                                const copy = { ...post }
+                                copy.content = evt.target.value
+                                createPost(copy)
+                            }
+                        }></textarea>
 
                 </div>
             </fieldset>
@@ -75,10 +85,24 @@ export const PostForm = () => {
                 <div className="form-group">
                     <label htmlFor="category">Category Select:</label>
                     <div className="select">
-                        <select>
-                            <option>Category #1</option>
-                            <option>Category #2</option>
-                        </select>
+                    <select name="moodId"
+                                    proptype="int"
+                                    value={post.category_id}
+                                    onChange={
+                                        (evt) => {
+                                            const copy = { ...post }
+                                            copy.category_id = evt.target.value
+                                            createPost(copy)
+                                        }
+                                    }>
+
+                                    <option value="0">Select a category</option>
+                                    {category.map(c => (
+                                        <option key={c.id} value={c.id}>
+                                            {c.label}
+                                        </option>
+                                    ))}
+                                </select>
                     </div>
                 </div>
             </fieldset>
