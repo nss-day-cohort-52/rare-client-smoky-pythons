@@ -5,6 +5,7 @@ import { UsersList } from "./users/UsersList"
 import { UserDetails } from "./users/UserDetails"
 import { PostRoutes } from "./PostRoutes"
 import { TagList } from "./tags/tag_list"
+import { MyPostList } from "./posts/MyPost"
 
 
 export const ApplicationViews = () => {
@@ -19,6 +20,9 @@ export const ApplicationViews = () => {
     </Route>
     <Route path = "/users/:user_id(\d+)">
       <UserDetails/>
+    </Route>
+    <Route path = "/my-post">
+      <MyPostList/>
     </Route>
 
 

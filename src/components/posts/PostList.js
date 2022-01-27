@@ -48,8 +48,7 @@ export const PostList = ({ posts, syncPosts }) => {
                             category={foundCategory}
                             syncPosts={syncPosts}
                             
-                        /> <button onClick={() => {if (confirm('Are you sure you want to delete this post?') == true) delete_post(post.id)}}>Delete</button>
-                        <button>Edit</button></div>
+                        /> <button onClick={() => {if (confirm('Are you sure you want to delete this post?') == true) delete_post(post.id)}}>Delete</button></div>
                     })
                 } 
             </table>
