@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useHistory, useParams } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import { CommentsRepository } from "../../repositories/CommentsRepository"
 
 export const PostComments = () => {
