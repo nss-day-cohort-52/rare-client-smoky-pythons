@@ -2,7 +2,9 @@ import { useEffect, useState } from "react"
 import { Post } from "./Post"
 import { Link } from "react-router-dom"
 import { PostsRepository } from "../../repositories/PostsRepository"
+import { get_all_users } from "../../repositories/UserRepository"
 import { getCategories } from "../../repositories/CategoriesRepository"
+import { PostTagsRepository } from "../../repositories/PostTagsRepository"
 
 
 export const PostList = ({ posts, syncPosts }) => {
@@ -10,6 +12,7 @@ export const PostList = ({ posts, syncPosts }) => {
     const [categories, setCategories] = useState([])
     const [filPosts, FilterPosts] = useState([])
     const [categoryFilter, setCategoryFilter] = useState(0)
+    const [postTags, setPostTags] = useState([])
 
 
 
@@ -37,7 +40,11 @@ export const PostList = ({ posts, syncPosts }) => {
             })
     }
 
-
+    useEffect(() => {
+        get_all_users().then(setUsers)
+        getCategories().then(setCategories)
+        PostTagsRepository.getAll().then(setPostTags)
+    }, [])
     return (
         <>
                 <div>
