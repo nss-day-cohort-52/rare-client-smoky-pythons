@@ -64,7 +64,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                     name="category"
                                     className="categoryFilterDropdown"
                                 >
-                                    <option key="category--0" value="">Category</option>
+                                    <option key="category--0" value={0}>Category</option>
                                     {categories.map((category) => (
                                         <option key={category.id} value={category.id}>
                                             {category.label}
