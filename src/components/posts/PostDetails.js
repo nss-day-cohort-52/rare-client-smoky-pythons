@@ -1,15 +1,20 @@
+import { useEffect, useState } from "react"
+import { useHistory } from "react-router-dom"
+import { getTags } from "../../repositories/TagsRepository"
 import { useParams, Link } from "react-router-dom"
-import { useState,useEffect } from "react"
-import {get_all_users} from "../../repositories/UserRepository"
+import { get_all_users } from "../../repositories/UserRepository"
 import "./PostDetails.css"
+
 export const PostDetails = ({ posts, syncPosts }) => {
     const { postId } = useParams()
-    const [users,setUsers] = useState([])
+    const history = useHistory()
+
+    const [users, setUsers] = useState([])
 
     const foundPost = posts.find(p => p.id === parseInt(postId))
-    const foundUser= users.find(u => u.id === foundPost?.user_id )
-   
-    const syncUsers = () => { 
+    const foundUser = users.find(u => u.id === foundPost?.user_id)
+
+    const syncUsers = () => {
         get_all_users().then(setUsers)
     }
 
@@ -23,12 +28,10 @@ export const PostDetails = ({ posts, syncPosts }) => {
             <h2 className="subtitle post-title">{foundPost?.title}</h2>
             <div className="author-and-tags">
                 <div><Link to={`/users/${foundUser?.id}`}>{foundUser?.username}</Link></div>
-                <button className="button">View comments</button>
                 <div className="tags-container">
-                    {/* Here we can map over all the tags tied to this specific post */}
-                    <div>Tags go here</div>
-                    <div>Tags go here</div>
-                    <div>Tags go here</div>
+                    {
+                        //   tags.map
+                    }
                 </div>
             </div>
             <div>{foundPost?.publication_date}</div>
@@ -39,6 +42,7 @@ export const PostDetails = ({ posts, syncPosts }) => {
                     </div>
                 </div>
             </div>
+            <button onClick={() => history.push(`${postId}/comments`)} className="button">View comments</button>
         </div>
     )
 }

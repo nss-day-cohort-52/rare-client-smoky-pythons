@@ -1,28 +1,31 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Post } from "./Post"
 import { Link } from "react-router-dom"
+import { get_all_users } from "../../repositories/UserRepository"
+import { getCategories } from "../../repositories/CategoriesRepository"
+import { PostTagsRepository } from "../../repositories/PostTagsRepository"
 
 
 export const PostList = ({ posts, syncPosts }) => {
     const [users, setUsers] = useState([])
     const [categories, setCategories] = useState([])
-   
+    const [postTags, setPostTags] = useState([])
 
-    const delete_post = (id) => {
-        fetch(`http://localhost:8088/posts/${id}`, { method: 'DELETE'})
-            .then(res => res.json())
-            .then(() => {
-                history.push("/posts")
-            })
-        }
-        
 
+
+
+
+    useEffect(() => {
+        get_all_users().then(setUsers)
+        getCategories().then(setCategories)
+        PostTagsRepository.getAll().then(setPostTags)
+    }, [])
     return (
         <>
-            <table className="table">
-              <div>
+            <div>
                 <center> <Link to="/newPost" className="navbar-item">New Post</Link></center>
-              </div>
+            </div>
+            <table className="table">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -34,25 +37,24 @@ export const PostList = ({ posts, syncPosts }) => {
                 </thead>
                 {
                     posts.map(post => {
-                        // We still need to fetch users and categories from the server
-                        const foundUser = users.find(user => user.id === post.userId)
-                        const foundCategory = categories.find(category => category.id === post.categoryId)
+                        const foundUser = users.find(user => user.id === post.user_id)
+                        const foundCategory = categories.find(category => category.id === post.category_id)
 
-                        return <div><Post
-                            key={post.id}
-                            id={post.id}
-                            title={post.title}
-                            content={post.content}
-                            publicationDate={post.publicationDate}
-                            user={foundUser}
-                            category={foundCategory}
-                            syncPosts={syncPosts}
-                            
-                        /> <button onClick={() => {if (confirm('Are you sure you want to delete this post?') == true) delete_post(post.id)}}>Delete</button></div>
+                        return (
+                                <Post
+                                    key={post.id}
+                                    postId={post.id}
+                                    title={post.title}
+                                    content={post.content}
+                                    publicationDate={post.publication_date}
+                                    user={foundUser}
+                                    category={foundCategory}
+                                    syncPosts={syncPosts}
+                                />
+                        )
                     })
-                } 
+                }
             </table>
         </>
     )
 }
- 
