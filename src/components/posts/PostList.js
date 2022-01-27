@@ -10,6 +10,16 @@ export const PostList = ({ posts, syncPosts }) => {
     const [users, setUsers] = useState([])
     const [categories, setCategories] = useState([])
     const [postTags, setPostTags] = useState([])
+   
+
+    const delete_post = (id) => {
+        fetch(`http://localhost:8088/posts/${id}`, { method: 'DELETE'})
+            .then(res => res.json())
+            .then(() => {
+                history.push("/posts")
+            })
+        }
+        
 
     
     useEffect(() => {
@@ -37,7 +47,7 @@ export const PostList = ({ posts, syncPosts }) => {
                         const foundUser = users.find(user => user.id === post.user_id)
                         const foundCategory = categories.find(category => category.id === post.category_id)
 
-                        return <Post
+                        return <div><Post
                             key={post.id}
                             postId={post.id}
                             title={post.title}
@@ -46,10 +56,12 @@ export const PostList = ({ posts, syncPosts }) => {
                             user={foundUser}
                             category={foundCategory?.label}
                             syncPosts={syncPosts}
-                        />
+                            
+                        /> <button onClick={() => {if (confirm('Are you sure you want to delete this post?') == true) delete_post(post.id)}}>Delete</button></div>
                     })
-                }
+                } 
             </table>
         </>
     )
 }
+ 
