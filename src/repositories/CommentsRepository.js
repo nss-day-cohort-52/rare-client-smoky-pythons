@@ -2,7 +2,7 @@ import { Settings } from "../components/utils/Settings"
 
 export const CommentsRepository = {
     async getAll() {
-        const res = await fetch(`${Settings.remoteURL}/comments?expand=author`)
+        const res = await fetch(`${Settings.remoteURL}/comments`)
         return await res.json()
     },
     async add(comment) {
@@ -15,5 +15,9 @@ export const CommentsRepository = {
         }
         const res = await fetch(`${Settings.remoteURL}/comments`, fetchOptions)
         return await res.json()
+    },
+    async delete(id) {
+        await fetch(`${Settings.remoteURL}/comments/${id}`, { method: "DELETE" })
+        
     }
 }

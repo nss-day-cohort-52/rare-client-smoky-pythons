@@ -8,7 +8,7 @@ export const Post = (props) => {
     const history = useHistory()
     const [postTags, setPostTags] = useState([])
     const [tags, setTags] = useState([])
-    
+
     useEffect(() => {
         PostTagsRepository.getAll().then(setPostTags)
         getTags().then(setTags)
@@ -26,25 +26,37 @@ export const Post = (props) => {
         return arr
     }
 
+    const delete_post = (id) => {
+        fetch(`http://localhost:8088/posts/${id}`, { method: 'DELETE' })
+            // .then(res => res.json())
+            .then(() => {
+                history.push("/posts")
+            })
+            .then(() => props.syncPosts())
+    }
+
     const tagsForCurrentPost = getTagsForCurrentPost()
 
     return (
-        <tbody>
-            <tr>
-                <td id="titleLink" onClick={() => history.push(`/posts/${props.postId}`)}>{props.title}</td>
-                <td>{props.user?.first_name} {props.user?.last_name}</td>
-                <td>{props.publicationDate}</td>
-                <td>{props.category}</td>
-                <td>
-                    {
-                        tagsForCurrentPost.map(tag => {
-                            return(
-                                <div key={tag.id}>{tag.label}</div>
-                            )
-                        })
-                    }
-                </td>
-            </tr>
-        </tbody>
+        <>
+            <tbody>
+                <tr>
+                    <td id="titleLink" onClick={() => history.push(`/posts/${props.postId}`)}>{props.title}</td>
+                    <td>{props.user?.first_name} {props.user?.last_name}</td>
+                    <td>{props.publicationDate}</td>
+                    <td>{props.category?.label}</td>
+                    <td>
+                        {
+                            tagsForCurrentPost.map(tag => {
+                                return (
+                                    <div key={tag.id}>{tag.label}</div>
+                                )
+                            })
+                        }
+                    </td>
+                    <td><button onClick={() => { if (confirm('Are you sure you want to delete this post?') == true) delete_post(props.postId) }}>Delete</button></td>
+                </tr>
+            </tbody>
+        </>
     )
 }
