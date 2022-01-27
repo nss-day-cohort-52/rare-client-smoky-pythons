@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
+import { getCategories } from "../../repositories/CategoriesRepository"
+import { PostTagsRepository } from "../../repositories/PostTagsRepository"
+import { get_all_users } from "../../repositories/UserRepository"
 import {Post} from "./Post"
 
 export const MyPostList = ({posts, syncPosts}) => {
     const [post, setPosts] = useState([])
-    const [myPosts, setMyPosts] = useState([])
     const [categories, setCategories] = useState([])
     const [users, setUsers] = useState([])
-    const history = useHistory()
+    const [postTags, setPostTags] = useState([])
 
     useEffect((
         () => {
@@ -19,24 +20,7 @@ export const MyPostList = ({posts, syncPosts}) => {
                 })
         }
     ), [])
-    useEffect((
-        () => {
-            fetch(`http://localhost:8088/users`)
-                .then(res => res.json())
-                .then((data) => {
-                    setUsers(data)
-                })
-        }
-    ), [])
-    useEffect((
-        () => {
-            fetch(`http://localhost:8088/categories`)
-                .then(res => res.json())
-                .then((data) => {
-                    setCategories(data)
-                })
-        }
-    ), [])
+    
 
     const getMyPosts = () => {
         let myPosts = []
@@ -49,14 +33,13 @@ export const MyPostList = ({posts, syncPosts}) => {
         return myPosts
     }
 
+    
+    useEffect(() => {
+        get_all_users().then(setUsers)
+        getCategories().then(setCategories)
+        PostTagsRepository.getAll().then(setPostTags)
+    }, [])
 
-    const delete_post = (id) => {
-        fetch(`http://localhost:8088/posts/${id}`, { method: 'DELETE' })
-            .then(res => res.json())
-           
-    }
-    
-    
     return (
         <>
                 <div>
@@ -75,8 +58,8 @@ export const MyPostList = ({posts, syncPosts}) => {
                 </thead>
                 {
                     getMyPosts().map(post => {
-                        const foundUser = users.find(user => user.id === post.userId)
-                        const foundCategory = categories.find(category => category.id === post.categoryId)
+                        const foundUser = users.find(user => user.id === post.user_id)
+                        const foundCategory = categories.find(category => category.id === post.category_id)
                         
                         return (
                             <>
@@ -91,8 +74,7 @@ export const MyPostList = ({posts, syncPosts}) => {
                                 syncPosts={syncPosts}
                                 
                                 />
-                     {/* <button>Edit</button>
-                     <button onClick={() => { if (confirm('Are you sure you want to delete this post?') == true) delete_post(post.id) }}>Delete</button></div> */}
+                     
                             </>
                      ) })
                     }

@@ -55,6 +55,7 @@ export const Post = (props) => {
                         }
                     </td>
                     <td><button onClick={() => { if (confirm('Are you sure you want to delete this post?') == true) delete_post(props.postId) }}>Delete</button></td>
+                    <td><button>Edit</button></td>
                 </tr>
             </tbody>
         </>

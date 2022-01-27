@@ -25,9 +25,7 @@ export const ApplicationViews = () => {
     <Route path = "/users/:user_id(\d+)">
       <UserDetails/>
     </Route>
-    <Route path = "/my-post">
-      <MyPostList/>
-    </Route>
+  
 
 
     <PostRoutes />
