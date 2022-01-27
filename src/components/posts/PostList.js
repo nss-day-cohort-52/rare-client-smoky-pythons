@@ -34,7 +34,6 @@ export const PostList = ({ posts, syncPosts }) => {
                 </thead>
                 {
                     posts.map(post => {
-                        //! We still need to fetch users and categories from the server
                         const foundUser = users.find(user => user.id === post.user_id)
                         const foundCategory = categories.find(category => category.id === post.category_id)
 
