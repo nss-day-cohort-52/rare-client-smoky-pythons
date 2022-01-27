@@ -70,6 +70,7 @@ export const MyPostList = ({posts, syncPosts}) => {
                         <th>Date</th>
                         <th>Category</th>
                         <th>Tags</th>
+                      
                     </tr>
                 </thead>
                 {
@@ -88,6 +89,7 @@ export const MyPostList = ({posts, syncPosts}) => {
                                 user={foundUser}
                                 category={foundCategory}
                                 syncPosts={syncPosts}
+                                
                                 />
                      {/* <button>Edit</button>
                      <button onClick={() => { if (confirm('Are you sure you want to delete this post?') == true) delete_post(post.id) }}>Delete</button></div> */}
@@ -99,7 +101,3 @@ export const MyPostList = ({posts, syncPosts}) => {
     )
 }
 
-// We still need to fetch users and categories from the server
-// const foundUser = users.find(user => user.id === post.userId)
-// const foundCategory = categories.find(category => category.id === post.categoryId)
-// post.user_id === parseInt(localStorage.getItem("token").map(foundPost)
