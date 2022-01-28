@@ -1,34 +1,21 @@
 import { useEffect, useState } from "react"
-import { Post } from "./Post"
-import { Link } from "react-router-dom"
 import { getCategories } from "../../repositories/CategoriesRepository"
 import { PostTagsRepository } from "../../repositories/PostTagsRepository"
-import { useParams } from "react-router-dom/cjs/react-router-dom.min"
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min"
 import { getSinglePost } from "../../repositories/PostsRepository"
 import { getTags } from "../../repositories/TagsRepository"
 
 
-export const EditPost = () => {
+export const EditPost = ({posts, syncPosts}) => {
 
     const [categories, setCategories] = useState([])
     const [tags, setTags] = useState([])
     const [postTags, setPostTags] = useState([])
     const { postId } = useParams()
     const [post, setPost] = useState({})
-
+    const history = useHistory()
     
-    const updatePost = (evt) => {
-
-        const updatedPost = {
-            userId: parseInt(localStorage.getItem("token")),
-            title: post.title,
-            content: post.content,
-            publicationDate: post.publication_date,
-            category: post.category_id,
-
-
-
-        }
+    const updatePost = (id, updatedPost) => {
         return fetch(`http://localhost:8088/posts/${id}`, {
             method: "PUT",
             headers: {
@@ -36,15 +23,19 @@ export const EditPost = () => {
             },
             body: JSON.stringify(updatedPost)
         })
-            .then(() => {
-                history.push("/posts")
-            })
     }
 
     useEffect(() => {
         getSinglePost(postId).then(setPost)
     }, [postId])
 
+    const save_update = () => {
+        const updatedPost = Object.assign({}, post)
+        updatePost(postId, updatedPost)
+            .then(() => {syncPosts()})
+            .then(() => history.push(`/posts/${postId}`))
+
+    }
 
     // useEffect(() => {
     //     let postTags = []
@@ -57,11 +48,7 @@ export const EditPost = () => {
     //     }
     // }, [post])
 
-    // const checkTag = (event) => {
-    //     let tag_id = parseInt(event.target.value)
-    //     let copy = [...postTags]
-    //         
-    //     }
+    
     
 
     useEffect(() => {
@@ -128,7 +115,7 @@ export const EditPost = () => {
                 </div>
             </div>
             <div className="field">
-                <button className="save-button" onClick={updatePost}>Save</button>
+                <button className="save-button" onClick={save_update}>Save</button>
             </div>
 
         </div >
