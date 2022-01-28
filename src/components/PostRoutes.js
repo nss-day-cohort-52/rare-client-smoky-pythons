@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Route } from "react-router-dom"
 import { PostsRepository } from "../repositories/PostsRepository"
+import { MyPostList } from "./posts/MyPost"
 import { PostCommentForm } from "./posts/PostCommentForm"
 import { PostComments } from "./posts/PostComments"
 import { PostDetails } from "./posts/PostDetails"
@@ -34,6 +35,9 @@ export const PostRoutes = () => {
             </Route>
             <Route exact path="/newPost">
                 <PostForm posts={posts} syncPosts={syncPosts} />
+            </Route>
+            <Route path = "/my-post">
+                <MyPostList posts={posts} syncPosts={syncPosts} />
             </Route>
         </>
     )

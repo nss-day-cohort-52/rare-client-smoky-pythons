@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom"
 import { PostsRepository } from "../../repositories/PostsRepository"
 import { getTags } from "../../repositories/TagsRepository"
 import "./PostEntry.css"
+
 export const PostForm = ({ syncPosts }) => {
     const [category, updateCategories] = useState([])
     const [tags, setTags] = useState([])
