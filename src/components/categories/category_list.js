@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getCategories } from "../../repositories/CategoriesRepository";
 import { CategoryForm } from "./category_form";
-import "./category.css"
+
 
 export const CategoryList = () => {
     const [categories, setCategories] = useState([])

@@ -5,6 +5,7 @@ import { MyPostList } from "./posts/MyPost"
 import { PostCommentForm } from "./posts/PostCommentForm"
 import { PostComments } from "./posts/PostComments"
 import { PostDetails } from "./posts/PostDetails"
+import { EditPost } from "./posts/PostEdit"
 import { PostForm } from "./posts/PostEntry"
 import { PostList } from "./posts/PostList"
 import { Subscriptions } from "./subscriptions/Subscriptions"
@@ -42,6 +43,9 @@ export const PostRoutes = () => {
             </Route>
             <Route exact path = "/">
                 <Subscriptions posts={posts} syncPosts={syncPosts} />
+            </Route>
+            <Route exact path = "/editPost/:postId(\d+)">
+                <EditPost posts={posts} syncPosts={syncPosts}/>
             </Route>
         </>
     )
