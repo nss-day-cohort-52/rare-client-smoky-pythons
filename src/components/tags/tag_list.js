@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getTags } from "../../repositories/TagsRepository";
 import { TagForm } from "./tag_form";
-import "../categories/category.css"
+
 
 export const TagList = () => {
     const [tags, setTags] = useState([])

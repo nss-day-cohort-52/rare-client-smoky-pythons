@@ -27,3 +27,8 @@ export const getPostsByCategory = (id) => {
     return fetch(`http://localhost:8088/posts?category_id=${id}`)
     .then(res => res.json())
 }
+
+export const getSinglePost = (id) => {
+    return fetch(`http://localhost:8088/posts/${id}`)
+        .then(res => res.json())
+}

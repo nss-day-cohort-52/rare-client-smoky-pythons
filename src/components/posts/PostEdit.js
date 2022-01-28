@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import { getCategories } from "../../repositories/CategoriesRepository"
 import { PostTagsRepository } from "../../repositories/PostTagsRepository"
 import { useParams } from "react-router-dom/cjs/react-router-dom.min"
+import { getSinglePost } from "../../repositories/PostsRepository"
+import { getTags } from "../../repositories/TagsRepository"
 
 
 export const EditPost = () => {
@@ -14,10 +16,7 @@ export const EditPost = () => {
     const { postId } = useParams()
     const [post, setPost] = useState({})
 
-    const getSinglePost = (id) => {
-        return fetch(`http://localhost:8088/posts/${id}`)
-            .then(res => res.json())
-    }
+    
     const updatePost = (evt) => {
 
         const updatedPost = {
@@ -46,43 +45,27 @@ export const EditPost = () => {
         getSinglePost(postId).then(setPost)
     }, [postId])
 
-    useEffect(() => {
-        getCategories()
-            .then(setCategories)
-    },
-        []
-    )
-    const get_all_tags = () => {
-        return fetch("http://localhost:8088/tags")
-            .then(res => res.json())
-    }
+
+    // useEffect(() => {
+    //     let postTags = []
+    //     if (post.tags?.length > 0) {
+    //         for (const tagId of post.tags) {
+    //             postTags.push(tagId)
+    //         }
+    //         setPostTags(postTags)
+
+    //     }
+    // }, [post])
+
+    // const checkTag = (event) => {
+    //     let tag_id = parseInt(event.target.value)
+    //     let copy = [...postTags]
+    //         
+    //     }
+    
 
     useEffect(() => {
-        let postTags = []
-        if (post.tags?.length > 0) {
-            for (const tagId of post.tags) {
-                postTags.push(tagId)
-            }
-            setPostTags(postTags)
-
-        }
-    }, [post])
-
-    const checkTag = (event) => {
-        let tag_id = parseInt(event.target.value)
-        let copy = [...postTags]
-        let selectedTag = copy.find((tag) => tag === tag_id)
-        if (selectedTag) {
-            let newCopy = copy.filter((id) => id !== tag_id)
-            setPostTags(newCopy)
-        } else {
-            copy.push(tag_id)
-            setPostTags(copy)
-        }
-    }
-
-    useEffect(() => {
-        get_all_tags().then(setTags)
+        getTags().then(setTags)
         getCategories().then(setCategories)
         PostTagsRepository.getAll().then(setPostTags)
     }, [])
@@ -131,7 +114,21 @@ export const EditPost = () => {
                 </div>
             </div>
             <div className="field">
-                <button className="saveEdit-btn" onClick={updatePost}>Save</button>
+                <div className="tag-options">
+                    {
+                        tags.map((tag) => {
+                            return <div key={tag.id} className="option">
+                                <input className="checkbox" type="checkbox" id={tag.id} name="tags" value={tag.id}
+                                    onChange={setPost}>
+                                </input>
+                                <label className="checkbox-label" htmlFor={tag.id}>{tag.label}</label>
+                            </div>
+                        })
+                    }
+                </div>
+            </div>
+            <div className="field">
+                <button className="save-button" onClick={updatePost}>Save</button>
             </div>
 
         </div >
