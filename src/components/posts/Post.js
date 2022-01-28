@@ -56,7 +56,7 @@ export const Post = (props) => {
                         }
                     </td>
                     <td><button onClick={() => { if (confirm('Are you sure you want to delete this post?') == true) delete_post(props.postId) }}>Delete</button></td>
-                    <button onClick={() => { history.push(`/editPost/${props.postId}`) }}>edit</button>
+                    <td><button onClick={() => { history.push(`/editPost/${props.postId}`) }}>Edit</button></td>
                 </tr>
             </tbody>
         </>
