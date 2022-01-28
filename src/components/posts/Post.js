@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import { PostTagsRepository } from "../../repositories/PostTagsRepository"
 import { getTags } from "../../repositories/TagsRepository"
@@ -55,9 +56,10 @@ export const Post = (props) => {
                         }
                     </td>
                     <td><button onClick={() => { if (confirm('Are you sure you want to delete this post?') == true) delete_post(props.postId) }}>Delete</button></td>
-                    <td><button>Edit</button></td>
+                    <button onClick={() => { history.push(`/editPost/${props.postId}`) }}>edit</button>
                 </tr>
             </tbody>
         </>
     )
 }
+
