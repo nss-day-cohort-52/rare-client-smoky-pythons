@@ -22,11 +22,10 @@ export const ApplicationViews = () => {
     <Route exact path = "/users">
       <UsersList/>
     </Route>
+
     <Route path = "/users/:user_id(\d+)">
       <UserDetails/>
     </Route>
-  
-
 
     <PostRoutes />
 
