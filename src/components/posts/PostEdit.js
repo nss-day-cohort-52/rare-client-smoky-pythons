@@ -37,20 +37,7 @@ export const EditPost = ({posts, syncPosts}) => {
 
     }
 
-    // useEffect(() => {
-    //     let postTags = []
-    //     if (post.tags?.length > 0) {
-    //         for (const tagId of post.tags) {
-    //             postTags.push(tagId)
-    //         }
-    //         setPostTags(postTags)
-
-    //     }
-    // }, [post])
-
     
-    
-
     useEffect(() => {
         getTags().then(setTags)
         getCategories().then(setCategories)
