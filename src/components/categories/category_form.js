@@ -26,10 +26,9 @@ export const CategoryForm = ({syncCategories}) => {
 
     return (
         <>
-        <div>
-            <h1>New Category</h1>
+        <div className="card">
+            <h1 className="label is-medium">New Category</h1>
             <div className="description">
-                    <label>Category Name: </label>
                     <input
                         onChange={
                             (evt) => {
@@ -44,7 +43,7 @@ export const CategoryForm = ({syncCategories}) => {
                         className="input"
                     ></input>
                 </div>
-                <button type="submit" className="form__submit"
+                <button type="submit" className="button"
                     onClick={
                         () => {
                             SubmitCategory()

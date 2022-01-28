@@ -26,10 +26,9 @@ export const TagForm = ({syncTags}) => {
 
     return (
         <>
-        <div>
-            <h1>New Tag</h1>
+        <div className="card">
+            <h1 className="label is-medium">New Tag</h1>
             <div className="description">
-                    <label>Tag Name: </label>
                     <input
                         onChange={
                             (evt) => {
@@ -44,7 +43,7 @@ export const TagForm = ({syncTags}) => {
                         className="input"
                     ></input>
                 </div>
-                <button type="submit" className="form__submit"
+                <button type="submit" className="button"
                     onClick={
                         () => {
                             SubmitTag()
