@@ -1,0 +1,15 @@
+.section {
+    width: 50%;
+}
+
+.subtitle {
+    border: rgb(227, 227, 227) 1px solid;
+    padding: 1% 0px;
+    border-radius: 5px;
+}
+.card {
+    padding: 3%;
+}
+.button {
+    margin-top: 2%;
+}
