@@ -37,7 +37,7 @@ export const PostList = ({ posts, syncPosts }) => {
     useEffect(() => {
         get_all_users().then(setUsers)
         getCategories().then(setCategories)
-        PostTagsRepository.getAll().then(setPostTags)
+        // PostTagsRepository.getAll().then(setPostTags)
     }, [])
 
     return (
@@ -104,6 +104,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         user={foundUser}
                                         category={foundCategory}
                                         syncPosts={syncPosts}
+                                        tags={post.tags}
                                     />
                                 }
                             } else {
@@ -117,6 +118,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         user={foundUser}
                                         category={foundCategory}
                                         syncPosts={syncPosts}
+                                        tags={post.tags}
 
                                     />
                                 } else if (categoryFilter === 0 && authorFilter === 0) {
@@ -129,6 +131,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         user={foundUser}
                                         category={foundCategory}
                                         syncPosts={syncPosts}
+                                        tags={post.tags}
 
                                     />
 
