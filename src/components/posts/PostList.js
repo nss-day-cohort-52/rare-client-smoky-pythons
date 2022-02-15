@@ -22,7 +22,7 @@ export const PostList = ({ posts, syncPosts }) => {
     return (
         <>
             <div>
-                <center> <Link to="/newPost" className="navbar-item">New Post</Link></center>
+                <center> <Link to="/newPost" className="navbar-item button m-3">New Post</Link></center>
             </div>
             <div className="filterSelect">
                 <select id="category" onChange={(event) => {
@@ -34,7 +34,7 @@ export const PostList = ({ posts, syncPosts }) => {
                 >
                     <option key="category--0" value={0}>Category</option>
                     {categories.map((category) => (
-                        <option key={category.id} value={category.id}>
+                        <option className="dropdown-item" key={category.id} value={category.id}>
                             {category.label}
                         </option>
                     ))}

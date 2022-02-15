@@ -40,8 +40,8 @@ export const Post = (props) => {
 
     return (
         <>
-            <tbody>
-                <tr>
+            <tbody >
+                <tr className="container is-widescreen mt-3">
                     <td id="titleLink" onClick={() => history.push(`/posts/${props.postId}`)}>{props.title}</td>
                     <td>{props.user?.first_name} {props.user?.last_name}</td>
                     <td>{props.publicationDate}</td>
