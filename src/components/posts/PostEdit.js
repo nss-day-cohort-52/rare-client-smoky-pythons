@@ -24,7 +24,7 @@ export const EditPost = ({ posts, syncPosts }) => {
     const history = useHistory()
 
     const updatePost = (id, updatedPost) => {
-        return fetch(`http://localhost:8088/posts/${id}`, {
+        return fetch(`http://localhost:8000/posts/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
