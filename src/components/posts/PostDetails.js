@@ -4,45 +4,42 @@ import { getTags } from "../../repositories/TagsRepository"
 import { useParams, Link } from "react-router-dom"
 import { get_all_users } from "../../repositories/UserRepository"
 import "./PostDetails.css"
+import { PostsRepository } from "../../repositories/PostsRepository"
 
 export const PostDetails = ({ posts, syncPosts }) => {
     const { postId } = useParams()
+    const [post, setPost] = useState({})
     const history = useHistory()
 
-    const [users, setUsers] = useState([])
+useEffect(() => {
+    PostsRepository.getOne(postId).then(setPost)
+}, [postId])
 
-    const foundPost = posts.find(p => p.id === parseInt(postId))
-    const foundUser = users.find(u => u.id === foundPost?.user_id)
+const username = post.user?.user?.username
 
-    const syncUsers = () => {
-        get_all_users().then(setUsers)
-    }
-
-    useEffect(() => {
-        syncUsers()
-    }, [])
-
-    return (
-        <div className="post-detail-container">
-            <div className="post-category">category goes here</div>
-            <h2 className="subtitle post-title">{foundPost?.title}</h2>
-            <div className="author-and-tags">
-                <div><Link to={`/users/${foundUser?.id}`}>{foundUser?.username}</Link></div>
-                <div className="tags-container">
-                    {
-                        //   tags.map
-                    }
-                </div>
+return (
+    <div className="post-detail-container">
+        <div className="post-category">{post.category?.label}</div>
+        <h2 className="subtitle post-title">{post.title}</h2>
+        <div className="author-and-tags">
+            <div><Link to={`/users/${post.user?.id}`}>{username}</Link></div>
+            <div className="tags-container">
+                {
+                    post.tags?.map(tag => {
+                        return <div key={tag.id}>{tag.label}</div>
+                    })
+                }
             </div>
-            <div>{foundPost?.publication_date}</div>
-            <div className="card">
-                <div className="card-content">
-                    <div className="content">
-                        {foundPost?.content}
-                    </div>
-                </div>
-            </div>
-            <button onClick={() => history.push(`${postId}/comments`)} className="button">View comments</button>
         </div>
-    )
+        <div>{post.publication_date}</div>
+        <div className="card">
+            <div className="card-content">
+                <div className="content">
+                    {post.content}
+                </div>
+            </div>
+        </div>
+        <button onClick={() => history.push(`${postId}/comments`)} className="button">View comments</button>
+    </div>
+)
 }
