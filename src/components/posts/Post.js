@@ -5,7 +5,11 @@ export const Post = (props) => {
     const history = useHistory()
 
     const delete_post = (id) => {
-        fetch(`http://localhost:8000/posts/${id}`, { method: 'DELETE' })
+        fetch(`http://localhost:8000/posts/${id}`, { method: 'DELETE', 
+        headers:{
+            "Authorization": `Token ${localStorage.getItem("token")}`
+        }
+    })
             // .then(res => res.json())
             .then(() => {
                 history.push("/posts")
