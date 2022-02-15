@@ -4,11 +4,11 @@
 
 
 export const getUserSubs = (id) =>{
-       return fetch(`http://localhost:8088/subscriptions/${id}`)
+       return fetch(`http://localhost:8000/subscriptions/${id}`)
       .then(res => res.json())}
 
 export const addToSubList = (subObj) => {
-      return fetch(`http://localhost:8088/subscriptions`,{
+      return fetch(`http://localhost:8000/subscriptions`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -17,7 +17,7 @@ export const addToSubList = (subObj) => {
     })
 }
   export const deleteSubscription = subId => {
-    return fetch(`http://localhost:8088/subscriptions/${subId}`, {
+    return fetch(`http://localhost:8000/subscriptions/${subId}`, {
       method: "DELETE"
     })
   };

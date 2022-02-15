@@ -10,34 +10,13 @@ import { PostTagsRepository } from "../../repositories/PostTagsRepository"
 export const PostList = ({ posts, syncPosts }) => {
     const [users, setUsers] = useState([])
     const [categories, setCategories] = useState([])
-    const [filPosts, FilterPosts] = useState([])
     const [categoryFilter, setCategoryFilter] = useState(0)
-    const [postTags, setPostTags] = useState([])
     const [authorFilter, setAuthorFilter] = useState(0)
-
-
-
+    
     useEffect(() => {
-        PostsRepository.getAll()
-            .then((postArray) => {
-                FilterPosts(postArray)
-            })
-    },
-        []
-    )
-
-    useEffect(() => {
-        getCategories()
-            .then(setCategories)
-    },
-        []
-    )
-
-
-    useEffect(() => {
+        getCategories().then(setCategories)
         get_all_users().then(setUsers)
         getCategories().then(setCategories)
-        PostTagsRepository.getAll().then(setPostTags)
     }, [])
 
     return (
@@ -104,6 +83,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         user={foundUser}
                                         category={foundCategory}
                                         syncPosts={syncPosts}
+                                        tags={post.tags}
                                     />
                                 }
                             } else {
@@ -117,6 +97,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         user={foundUser}
                                         category={foundCategory}
                                         syncPosts={syncPosts}
+                                        tags={post.tags}
 
                                     />
                                 } else if (categoryFilter === 0 && authorFilter === 0) {
@@ -129,6 +110,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         user={foundUser}
                                         category={foundCategory}
                                         syncPosts={syncPosts}
+                                        tags={post.tags}
 
                                     />
 

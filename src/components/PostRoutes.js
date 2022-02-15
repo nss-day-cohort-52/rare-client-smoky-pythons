@@ -22,7 +22,7 @@ export const PostRoutes = () => {
     
     return (
         <>
-            <Route exact path="/posts">
+            <Route exact path={["/", "/posts"]}>
                 <PostList posts={posts} syncPosts={syncPosts} />
             </Route>
             <Route exact path="/posts/:postId(\d+)">

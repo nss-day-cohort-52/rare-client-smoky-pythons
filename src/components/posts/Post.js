@@ -7,25 +7,25 @@ import "./Post.css"
 
 export const Post = (props) => {
     const history = useHistory()
-    const [postTags, setPostTags] = useState([])
-    const [tags, setTags] = useState([])
+    // const [postTags, setPostTags] = useState([])
+    // const [tags, setTags] = useState([])
 
-    useEffect(() => {
-        PostTagsRepository.getAll().then(setPostTags)
-        getTags().then(setTags)
-    }, [])
+    // useEffect(() => {
+    //     PostTagsRepository.getAll().then(setPostTags)
+    //     getTags().then(setTags)
+    // }, [])
 
-    const getTagsForCurrentPost = () => {
-        let arr = []
-        for (const tag of tags) {
-            for (const postTag of postTags) {
-                if (tag.id === postTag.tag_id && props.postId === postTag.post_id) {
-                    arr.push(tag)
-                }
-            }
-        }
-        return arr
-    }
+    // const getTagsForCurrentPost = () => {
+    //     let arr = []
+    //     for (const tag of tags) {
+    //         for (const postTag of postTags) {
+    //             if (tag.id === postTag.tag_id && props.postId === postTag.post_id) {
+    //                 arr.push(tag)
+    //             }
+    //         }
+    //     }
+    //     return arr
+    // }
 
     const delete_post = (id) => {
         fetch(`http://localhost:8088/posts/${id}`, { method: 'DELETE' })
@@ -36,7 +36,7 @@ export const Post = (props) => {
             .then(() => props.syncPosts())
     }
 
-    const tagsForCurrentPost = getTagsForCurrentPost()
+    // const tagsForCurrentPost = getTagsForCurrentPost()
 
     return (
         <>
@@ -48,7 +48,7 @@ export const Post = (props) => {
                     <td>{props.category?.label}</td>
                     <td>
                         {
-                            tagsForCurrentPost.map(tag => {
+                            props.tags.map(tag => {
                                 return (
                                     <div key={tag.id}>{tag.label}</div>
                                 )

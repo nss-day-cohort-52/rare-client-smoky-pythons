@@ -1,3 +1,3 @@
 export const Settings = {
-    remoteURL: "http://localhost:8088"
+    remoteURL: "http://localhost:8000"
   }
