@@ -44,9 +44,9 @@ export const PostRoutes = () => {
             <Route path = "/my-post">
                 <MyPostList posts={posts} syncPosts={syncPosts} />
             </Route>
-            <Route exact path = "/">
+            {/* <Route exact path = "/">
                 <Subscriptions posts={posts} syncPosts={syncPosts} />
-            </Route>
+            </Route> */}
             <Route exact path = "/editPost/:postId(\d+)">
                 <EditPost posts={posts} syncPosts={syncPosts}/>
             </Route>
