@@ -9,7 +9,9 @@ import { PostDetails } from "./posts/PostDetails"
 import { EditPost } from "./posts/PostEdit"
 import { PostForm } from "./posts/PostEntry"
 import { PostList } from "./posts/PostList"
+import { Subscriptions } from "./subscriptions/Subscriptions"
 import { EditTag } from "./tags/edit_tag"
+
 
 export const PostRoutes = () => {
     const [posts, setPosts] = useState([])
@@ -41,6 +43,9 @@ export const PostRoutes = () => {
             </Route>
             <Route path = "/my-post">
                 <MyPostList posts={posts} syncPosts={syncPosts} />
+            </Route>
+            <Route exact path = "/">
+                <Subscriptions posts={posts} syncPosts={syncPosts} />
             </Route>
             <Route exact path = "/editPost/:postId(\d+)">
                 <EditPost posts={posts} syncPosts={syncPosts}/>

@@ -6,6 +6,10 @@ export const PostsRepository = {
         const res = await fetch(`${Settings.remoteURL}/posts`, FetchOptions())
         return await res.json()
     },
+    async getOne(id) {
+        const res = await fetch(`${Settings.remoteURL}/posts/${id}`, FetchOptions())
+        return await res.json()
+    },
     async add(post) {
         const res = await fetch(`${Settings.remoteURL}/posts`, FetchOptions("POST", post))
         return await res.json()
