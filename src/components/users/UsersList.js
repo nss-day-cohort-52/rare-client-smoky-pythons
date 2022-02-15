@@ -16,14 +16,14 @@ export const UsersList = () => {
     }, [])
 
   return (
-        <div>
-            <h1>Users</h1>
+        <div className="card">
+            <h1 className="label is-large">Users</h1>
             <article className="users">
                 {
                     users.map(user => {
-                        return <section className="user" key={user.id}>
+                        return <section className="user is-size-5-desktop" key={user.id}>
                                 <Link to={`/users/${user.id}`} >
-                                   <h3>{user.username}</h3>
+                                   <h3>{user.first_name} {user.last_name} ({user.username})</h3>
                                 </Link>
                         </section>
                     })
