@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
 import { Post } from "./Post"
 import { Link } from "react-router-dom"
-import { PostsRepository } from "../../repositories/PostsRepository"
 import { get_all_users } from "../../repositories/UserRepository"
 import { getCategories } from "../../repositories/CategoriesRepository"
-import { PostTagsRepository } from "../../repositories/PostTagsRepository"
 
 
 export const PostList = ({ posts, syncPosts }) => {
@@ -51,7 +49,7 @@ export const PostList = ({ posts, syncPosts }) => {
                     <option key="author--0" value={0}>Author</option>
                     {users.map((user) => (
                         <option key={user.id} value={user.id}>
-                            {user.first_name} {user.last_name}
+                            {user.user.first_name} {user.user.last_name}
                         </option>
                     ))}
                 </select>
@@ -69,33 +67,30 @@ export const PostList = ({ posts, syncPosts }) => {
                 {
                     posts.map(
                         (post) => {
-                            const foundUser = users.find(user => user.id === post.user_id)
-                            const foundCategory = categories.find(category => category.id === post.category_id)
-
                             if (categoryFilter !== 0 && authorFilter !== 0) {
-                                if (post.category_id === categoryFilter && post.user_id === authorFilter) {
+                                if (post.category.id === categoryFilter && post.user.id === authorFilter) {
                                     return <Post
                                         key={post.id}
                                         postId={post.id}
                                         title={post.title}
                                         content={post.content}
                                         publicationDate={post.publication_date}
-                                        user={foundUser}
-                                        category={foundCategory}
+                                        user={post.user.user}
+                                        category={post.category}
                                         syncPosts={syncPosts}
                                         tags={post.tags}
                                     />
                                 }
                             } else {
-                                if (post.category_id === categoryFilter || post.user_id === authorFilter) {
+                                if (post.category.id === categoryFilter || post.user.id === authorFilter) {
                                     return <Post
                                         key={post.id}
                                         postId={post.id}
                                         title={post.title}
                                         content={post.content}
                                         publicationDate={post.publication_date}
-                                        user={foundUser}
-                                        category={foundCategory}
+                                        user={post.user.user}
+                                        category={post.category}
                                         syncPosts={syncPosts}
                                         tags={post.tags}
 
@@ -107,8 +102,8 @@ export const PostList = ({ posts, syncPosts }) => {
                                         title={post.title}
                                         content={post.content}
                                         publicationDate={post.publication_date}
-                                        user={foundUser}
-                                        category={foundCategory}
+                                        user={post.user.user}
+                                        category={post.category}
                                         syncPosts={syncPosts}
                                         tags={post.tags}
 
