@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { getCategories } from "../../repositories/CategoriesRepository"
-import { PostTagsRepository } from "../../repositories/PostTagsRepository"
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min"
 import { getSinglePost } from "../../repositories/PostsRepository"
 import { getTags } from "../../repositories/TagsRepository"
@@ -10,7 +9,6 @@ export const EditPost = ({ posts, syncPosts }) => {
 
     const [categories, setCategories] = useState([])
     const [tags, setTags] = useState([])
-    const [postTags, setPostTags] = useState([])
     const { postId } = useParams()
     const [post, setPost] = useState({})
     const [newPost, setNewPost] = useState({
@@ -49,7 +47,6 @@ export const EditPost = ({ posts, syncPosts }) => {
     useEffect(() => {
         getTags().then(setTags)
         getCategories().then(setCategories)
-        // PostTagsRepository.getAll().then(setPostTags)
     }, [])
 
 
