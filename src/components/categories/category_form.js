@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { FetchOptions } from "../utils/FetchOptions";
 
 export const CategoryForm = ({syncCategories}) => {
     const [category, modifyCategory] = useState({
@@ -9,15 +10,7 @@ export const CategoryForm = ({syncCategories}) => {
         const newCategory = {
             label: category.label
         }
-
-        const fetchOption = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newCategory)
-        }
-        return fetch(`http://localhost:8088/categories`, fetchOption)
+        return fetch(`http://localhost:8000/categories`, FetchOptions("POST", newCategory))
         .then(syncCategories)
         .then(modifyCategory(newCategory))
     }

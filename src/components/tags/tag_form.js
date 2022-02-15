@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { FetchOptions } from "../utils/FetchOptions";
 
 export const TagForm = ({syncTags}) => {
     const [tag, modifyTag] = useState({
@@ -9,15 +10,7 @@ export const TagForm = ({syncTags}) => {
         const newTag = {
             label: tag.label
         }
-
-        const fetchOption = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newTag)
-        }
-        return fetch(`http://localhost:8088/tags`, fetchOption)
+        return fetch(`http://localhost:8000/tags`, FetchOptions("POST", newTag))
         .then(syncTags)
         .then(modifyTag(newTag))
     }
