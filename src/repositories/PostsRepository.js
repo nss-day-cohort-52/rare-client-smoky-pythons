@@ -1,34 +1,28 @@
+import { FetchOptions } from "../components/utils/FetchOptions"
 import { Settings } from "../components/utils/Settings"
 
 export const PostsRepository = {
     async getAll() {
-        const res = await fetch(`${Settings.remoteURL}/posts`)
+        const res = await fetch(`${Settings.remoteURL}/posts`, FetchOptions())
         return await res.json()
     },
     async add(post) {
-        const fetchOptions = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(post)
-        }
-        const res = await fetch(`${Settings.remoteURL}/posts`, fetchOptions)
+        const res = await fetch(`${Settings.remoteURL}/posts`, FetchOptions("POST", post))
         return await res.json()
     }
 }
 
 export const getPostsByUser = (id) => {
-    return fetch(`http://localhost:8088/posts?user_id=${id}`)
+    return fetch(`http://localhost:8000/posts?user_id=${id}`, FetchOptions())
     .then(res => res.json())
 }
 
 export const getPostsByCategory = (id) => {
-    return fetch(`http://localhost:8088/posts?category_id=${id}`)
+    return fetch(`http://localhost:8000/posts?category_id=${id}`, FetchOptions())
     .then(res => res.json())
 }
 
 export const getSinglePost = (id) => {
-    return fetch(`http://localhost:8088/posts/${id}`)
+    return fetch(`http://localhost:8000/posts/${id}`, FetchOptions())
         .then(res => res.json())
 }
