@@ -10,14 +10,14 @@ export const UserDetails = () => {
     const currentUser = parseInt(localStorage.getItem("token"))
     const [user, setUser] = useState({})
     const [subs, setSubs] = useState([])
-    // const [currentSub, setCurrentSub] = useState([])
+    
 
     useEffect(() => {
         get_single_user(user_id)
             .then(setUser)
         getUserSubs(currentUser)
             .then(setSubs)
-        // setCurrentSub(foundSub)
+        
             
             
     }, [])
