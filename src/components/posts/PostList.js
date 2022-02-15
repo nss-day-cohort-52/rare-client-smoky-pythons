@@ -10,7 +10,7 @@ export const PostList = ({ posts, syncPosts }) => {
     const [categories, setCategories] = useState([])
     const [categoryFilter, setCategoryFilter] = useState(0)
     const [authorFilter, setAuthorFilter] = useState(0)
-    
+
     useEffect(() => {
         getCategories().then(setCategories)
         get_all_users().then(setUsers)
@@ -30,7 +30,7 @@ export const PostList = ({ posts, syncPosts }) => {
                     name="category"
                     className="categoryFilterDropdown"
                 >
-                    <option key="category--0" value={0}>Category</option>
+                    <option key="category--0" value={0}>All categories</option>
                     {categories.map((category) => (
                         <option className="dropdown-item" key={category.id} value={category.id}>
                             {category.label}
