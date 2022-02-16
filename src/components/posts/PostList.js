@@ -21,6 +21,7 @@ export const PostList = ({ posts, syncPosts }) => {
         <>
             <div>
                 <center> <Link to="/newPost" className="navbar-item button m-3">New Post</Link></center>
+                <center> <Link to="/newReaction" className="navbar-item button m-3">New Reaction</Link></center>
             </div>
             <div className="filterSelect">
                 <select id="category" onChange={(event) => {
