@@ -8,10 +8,15 @@ import { Subscriptions } from "./subscriptions/Subscriptions"
 
 export const Rare = () => {
   const [token, setTokenState] = useState(localStorage.getItem('token'))
+  const [isStaff, setIsStaff] = useState(localStorage.getItem('isStaff'))
 
   const setToken = (newToken) => {
     localStorage.setItem('token', newToken)
     setTokenState(newToken)
+  }
+  const setStaffOption = (boolean) => {
+    localStorage.setItem('isStaff', boolean)
+    setIsStaff(boolean)
   }
 
   return <>
@@ -29,13 +34,12 @@ export const Rare = () => {
 
     <Route exact path="/login" >
       <NavBar token={token} setToken={setToken} />
-      <Login token={token} setToken={setToken} />
+      <Login setStaffOption={setStaffOption} token={token} setToken={setToken} />
     </Route>
 
     <Route path="/register" exact>
       <NavBar token={token} setToken={setToken} />
       <Register token={token} setToken={setToken} />
     </Route>
-
   </>
 }

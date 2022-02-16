@@ -1,23 +1,24 @@
+import { FetchOptions } from "../components/utils/FetchOptions"
 import { Settings } from "../components/utils/Settings"
 
 export const CommentsRepository = {
     async getAll() {
-        const res = await fetch(`${Settings.remoteURL}/comments`)
+        const res = await fetch(`${Settings.remoteURL}/comments`, FetchOptions())
+        return await res.json()
+    },
+    async getOne(id) {
+        const res = await fetch(`${Settings.remoteURL}/comments/${id}`, FetchOptions())
         return await res.json()
     },
     async add(comment) {
-        const fetchOptions = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(comment)
-        }
-        const res = await fetch(`${Settings.remoteURL}/comments`, fetchOptions)
+        const res = await fetch(`${Settings.remoteURL}/comments`, FetchOptions("POST", comment))
         return await res.json()
     },
+    async update(id, comment) {
+        const res = await fetch(`${Settings.remoteURL}/comments/${id}`, FetchOptions("PUT", comment))
+        return await res
+    },
     async delete(id) {
-        await fetch(`${Settings.remoteURL}/comments/${id}`, { method: "DELETE" })
-        
+        await fetch(`${Settings.remoteURL}/comments/${id}`, FetchOptions("DELETE"))
     }
 }
