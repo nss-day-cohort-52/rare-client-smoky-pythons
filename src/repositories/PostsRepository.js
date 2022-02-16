@@ -13,6 +13,10 @@ export const PostsRepository = {
     async add(post) {
         const res = await fetch(`${Settings.remoteURL}/posts`, FetchOptions("POST", post))
         return await res.json()
+    },
+    async update(id, obj) {
+        const res = await fetch(`${Settings.remoteURL}/posts/${id}`, FetchOptions("PUT", obj))
+        return res
     }
 }
 
