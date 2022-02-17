@@ -1,9 +1,10 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import "./Post.css"
-
+import { PostsRepository } from "../../repositories/PostsRepository.js"
 export const Post = (props) => {
     const history = useHistory()
 
+<<<<<<< HEAD
     const delete_post = (id) => {
         fetch(`http://localhost:8000/posts/${id}`, { method: 'DELETE', 
         headers:{
@@ -15,6 +16,12 @@ export const Post = (props) => {
                 history.push("/posts")
             })
             .then(() => props.syncPosts())
+=======
+    const deletePost = (id) => {
+        PostsRepository.delete(id)
+            .then(() => history.push("/posts"))
+            .then(props.syncPosts)
+>>>>>>> 383202b5f8a2b210482bde9403e0be5776d30815
     }
 
     return (
@@ -34,8 +41,20 @@ export const Post = (props) => {
                             })
                         }
                     </td>
-                    <td><button onClick={() => { if (confirm('Are you sure you want to delete this post?') == true) delete_post(props.postId) }}>Delete</button></td>
-                    <td><button onClick={() => { history.push(`/editPost/${props.postId}`) }}>Edit</button></td>
+                    <td>
+                        <button
+                            onClick={() => {
+                                if (confirm('Are you sure you want to delete this post?') == true)
+                                    deletePost(props.postId)
+                            }
+                            }>Delete</button>
+                    </td>
+                    <td>
+                        <button
+                            onClick={() => {
+                                history.push(`/editPost/${props.postId}`)
+                            }}>Edit</button>
+                    </td>
                 </tr>
             </tbody>
         </>

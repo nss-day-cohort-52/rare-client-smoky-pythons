@@ -14,9 +14,12 @@ export const PostsRepository = {
         const res = await fetch(`${Settings.remoteURL}/posts`, FetchOptions("POST", post))
         return await res.json()
     },
-    async update(id, obj) {
-        const res = await fetch(`${Settings.remoteURL}/posts/${id}`, FetchOptions("PUT", obj))
+    async update(id, post) {
+        const res = await fetch(`${Settings.remoteURL}/posts/${id}`, FetchOptions("PUT", post))
         return res
+    },
+    async delete(id) {
+        await fetch(`${Settings.remoteURL}/posts/${id}`, FetchOptions("DELETE"))
     }
 }
 
