@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
-import { getTags } from "../../repositories/TagsRepository"
 import { useParams, Link } from "react-router-dom"
-import { get_all_users } from "../../repositories/UserRepository"
-import "./PostDetails.css"
 import { PostsRepository } from "../../repositories/PostsRepository"
+import "./PostDetails.css"
 
 export const PostDetails = ({ posts, syncPosts }) => {
     const { postId } = useParams()
@@ -40,6 +38,7 @@ return (
             </div>
         </div>
         <button onClick={() => history.push(`${postId}/comments`)} className="button">View comments</button>
+        <button onClick={() => history.push(`${postId}/tags/manage`)} className="button">Manage tags</button>
     </div>
 )
 }

@@ -4,7 +4,7 @@ import { CategoryList } from "./categories/category_list"
 import { UsersList } from "./users/UsersList"
 import { UserDetails } from "./users/UserDetails"
 import { PostRoutes } from "./PostRoutes"
-import { TagList } from "./tags/tag_list"
+import { TagList } from "./tags/TagList"
 
 
 

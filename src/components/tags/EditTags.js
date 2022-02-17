@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min
 import { getTagById } from "../../repositories/TagsRepository"
 import { FetchOptions } from "../utils/FetchOptions"
 
-export const EditTag = () => {
+export const EditTags = () => {
     const {TagId} = useParams()
     const history = useHistory()
     const [tag, modifyTag] = useState({

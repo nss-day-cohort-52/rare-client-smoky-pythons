@@ -14,9 +14,9 @@ export const Rare = () => {
     localStorage.setItem('token', newToken)
     setTokenState(newToken)
   }
-  const setStaffOption = (boolean) => {
-    localStorage.setItem('isStaff', boolean)
-    setIsStaff(boolean)
+  const setStaffOption = (value) => {
+    localStorage.setItem('isStaff', value)
+    setIsStaff(value)
   }
 
   return <>
@@ -38,7 +38,7 @@ export const Rare = () => {
     </Route>
 
     <Route path="/register" exact>
-      <NavBar token={token} setToken={setToken} />
+      <NavBar setStaffOption={setStaffOption} token={token} setToken={setToken} />
       <Register token={token} setToken={setToken} />
     </Route>
   </>

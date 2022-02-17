@@ -49,7 +49,7 @@ export const PostList = ({ posts, syncPosts }) => {
                     <option key="author--0" value={0}>Author</option>
                     {users.map((user) => (
                         <option key={user.id} value={user.id}>
-                            {user.user.first_name} {user.user.last_name}
+                            {user.user?.first_name} {user.user?.last_name}
                         </option>
                     ))}
                 </select>

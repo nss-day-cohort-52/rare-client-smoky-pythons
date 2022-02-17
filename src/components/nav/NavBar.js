@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom"
 import "./NavBar.css"
 import Logo from "./rare.jpeg"
 
-export const NavBar = ({ token, setToken }) => {
+export const NavBar = ({ token, setToken, setStaffOption }) => {
   const history = useHistory()
   const navbar = useRef()
   const hamburger = useRef()
@@ -51,7 +51,8 @@ export const NavBar = ({ token, setToken }) => {
                 token
                   ?
                   <button className="button is-outlined" onClick={() => {
-                    setToken('')
+                    localStorage.removeItem('token')
+                    localStorage.removeItem('isStaff')
                     history.push('/login')
                   }}>Logout</button>
                   :

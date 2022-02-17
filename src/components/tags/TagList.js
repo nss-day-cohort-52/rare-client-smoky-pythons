@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getTags } from "../../repositories/TagsRepository";
-import { TagForm } from "./tag_form";
+import { TagForm } from "./TagForm";
 
 
 export const TagList = () => {
@@ -24,7 +24,7 @@ export const TagList = () => {
                     "Authorization": `Token ${localStorage.getItem("token")}`
                 }
             })
-            .then(syncTags())
+            .then(syncTags)
         }
 
     return (

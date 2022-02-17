@@ -11,7 +11,7 @@ import { EditPost } from "./posts/PostEdit"
 import { PostForm } from "./posts/PostEntry"
 import { PostList } from "./posts/PostList"
 import { Subscriptions } from "./subscriptions/Subscriptions"
-import { EditTag } from "./tags/edit_tag"
+import { EditTags } from "./tags/EditTags"
 
 
 export const PostRoutes = () => {
@@ -58,7 +58,7 @@ export const PostRoutes = () => {
                 <EditCategory/>
             </Route>
             <Route exact path = "/tags/edit/:TagId(\d+)">
-                <EditTag/>
+                <EditTags/>
             </Route>
         </>
     )

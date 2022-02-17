@@ -24,7 +24,7 @@ export const CategoryList = () => {
                 "Authorization": `Token ${localStorage.getItem("token")}`
             }
         })
-        .then(syncCategories())
+        .then(syncCategories)
     }
 
     return (
