@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Post } from "./Post"
 import { Link } from "react-router-dom"
-import { get_all_users } from "../../repositories/UserRepository"
+import { getAllUsers } from "../../repositories/UserRepository"
 import { getCategories } from "../../repositories/CategoriesRepository"
 
 
@@ -13,7 +13,7 @@ export const PostList = ({ posts, syncPosts }) => {
 
     useEffect(() => {
         getCategories().then(setCategories)
-        get_all_users().then(setUsers)
+        getAllUsers().then(setUsers)
         getCategories().then(setCategories)
     }, [])
 

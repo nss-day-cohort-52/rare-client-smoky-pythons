@@ -23,7 +23,7 @@ export const ApplicationViews = () => {
       <UsersList/>
     </Route>
 
-    <Route path = "/users/:user_id(\d+)">
+    <Route path = "/users/:userId(\d+)">
       <UserDetails/>
     </Route>
 

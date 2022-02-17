@@ -1,14 +1,12 @@
 import { useState,useEffect } from "react"
-import {get_all_users,get_single_user} from "../../repositories/UserRepository"
-import { useHistory } from "react-router-dom"
+import {getAllUsers} from "../../repositories/UserRepository"
 import {Link} from "react-router-dom"
 
 export const UsersList = () => {
     const [users, setUsers] = useState([])
-    const history = useHistory()
 
     const syncUsers = () => { 
-        get_all_users().then(setUsers)
+        getAllUsers().then(setUsers)
     }
 
     useEffect(() => {
@@ -21,9 +19,9 @@ export const UsersList = () => {
             <article className="users">
                 {
                     users.map(user => {
-                        return <section className="user is-size-5-desktop" key={user.id}>
-                                <Link to={`/users/${user.id}`} >
-                                   <h3>{user.first_name} {user.last_name} ({user.username})</h3>
+                        return <section className="user is-size-5-desktop" key={user.user?.id}>
+                                <Link to={`/users/${user.user?.id}`} >
+                                   <h3>{user.user?.first_name} {user.user?.last_name} ({user.user?.username})</h3>
                                 </Link>
                         </section>
                     })

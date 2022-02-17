@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { CommentsRepository } from "../../repositories/CommentsRepository"
-import { get_all_users } from "../../repositories/UserRepository"
 
 export const PostComments = () => {
     const history = useHistory()
     const { postId } = useParams()
     const [comments, setComments] = useState([])
-    const [users, setUsers] = useState([])
 
     const syncComments = () => {
         CommentsRepository.getAll().then(setComments)
@@ -15,7 +13,6 @@ export const PostComments = () => {
 
     useEffect(() => {
         syncComments()
-        get_all_users().then(setUsers)
     }, [])
 
     const handleDeleteComment = (id) => {
