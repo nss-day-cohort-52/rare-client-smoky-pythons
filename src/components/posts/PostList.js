@@ -21,6 +21,7 @@ export const PostList = ({ posts, syncPosts }) => {
         <>
             <div>
                 <center> <Link to="/newPost" className="navbar-item button m-3">New Post</Link></center>
+                <center> <Link to="/newReaction" className="navbar-item button m-3">New Reaction</Link></center>
             </div>
             <div className="filterSelect">
                 <select id="category" onChange={(event) => {
@@ -79,6 +80,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         category={post.category}
                                         syncPosts={syncPosts}
                                         tags={post.tags}
+                                        reactionCount={post.reactions}
                                     />
                                 }
                             } else {
@@ -93,7 +95,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         category={post.category}
                                         syncPosts={syncPosts}
                                         tags={post.tags}
-
+                                        reactionCount={post.reactions}
                                     />
                                 } else if (categoryFilter === 0 && authorFilter === 0) {
                                     return <Post
@@ -106,7 +108,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         category={post.category}
                                         syncPosts={syncPosts}
                                         tags={post.tags}
-
+                                        reactionCount={post.reactions}
                                     />
 
                                 }

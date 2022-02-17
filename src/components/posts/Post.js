@@ -1,6 +1,8 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 import "./Post.css"
 import { PostsRepository } from "../../repositories/PostsRepository.js"
+import { ReactionList } from "../reactions/ReactionList.js"
+// import { ReactionCount } from "../reactions/ReactionCount"
 export const Post = (props) => {
     const history = useHistory()
 
@@ -40,6 +42,12 @@ export const Post = (props) => {
                             onClick={() => {
                                 history.push(`/editPost/${props.postId}`)
                             }}>Edit</button>
+                    </td>
+                    {/* <td>
+                        <ReactionCount postId = {props.postId} />
+                    </td> */}
+                    <td>
+                        <ReactionList postId = {props.postId} reactionCount={props.reactionCount} syncPosts={props.syncPosts}/>
                     </td>
                 </tr>
             </tbody>

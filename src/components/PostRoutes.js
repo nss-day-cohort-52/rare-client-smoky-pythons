@@ -10,6 +10,7 @@ import { PostDetails } from "./posts/PostDetails"
 import { EditPost } from "./posts/PostEdit"
 import { PostForm } from "./posts/PostEntry"
 import { PostList } from "./posts/PostList"
+import { ReactionForm } from "./reactions/ReactionForm"
 import { Subscriptions } from "./subscriptions/Subscriptions"
 import { EditTags } from "./tags/EditTags"
 
@@ -59,6 +60,9 @@ export const PostRoutes = () => {
             </Route>
             <Route exact path = "/tags/edit/:TagId(\d+)">
                 <EditTags/>
+            </Route>
+            <Route exact path = "/newReaction">
+                <ReactionForm/>
             </Route>
         </>
     )
