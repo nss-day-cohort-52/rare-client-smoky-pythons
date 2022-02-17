@@ -80,6 +80,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         category={post.category}
                                         syncPosts={syncPosts}
                                         tags={post.tags}
+                                        reactionCount={post.reactions}
                                     />
                                 }
                             } else {
@@ -94,7 +95,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         category={post.category}
                                         syncPosts={syncPosts}
                                         tags={post.tags}
-
+                                        reactionCount={post.reactions}
                                     />
                                 } else if (categoryFilter === 0 && authorFilter === 0) {
                                     return <Post
@@ -107,7 +108,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         category={post.category}
                                         syncPosts={syncPosts}
                                         tags={post.tags}
-
+                                        reactionCount={post.reactions}
                                     />
 
                                 }
