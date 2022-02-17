@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 import { loginUser } from "./AuthManager"
 
-export const Login = ({ setToken }) => {
+export const Login = ({ setToken, setStaffOption }) => {
   const username = useRef()
   const password = useRef()
   const history = useHistory()
@@ -19,6 +19,7 @@ export const Login = ({ setToken }) => {
     loginUser(user).then(res => {
       if ("valid" in res && res.valid) {
         setToken(res.token)
+        setStaffOption(res.is_staff)
         history.push("/")
       }
       else {
