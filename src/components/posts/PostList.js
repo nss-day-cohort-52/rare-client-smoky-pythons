@@ -3,19 +3,43 @@ import { Post } from "./Post"
 import { Link } from "react-router-dom"
 import { getAllUsers } from "../../repositories/UserRepository"
 import { getCategories } from "../../repositories/CategoriesRepository"
+import { getTags } from "../../repositories/TagsRepository"
 import "./PostList.css"
+import { searchByTitle } from "../../repositories/PostsRepository"
 
 export const PostList = ({ posts, syncPosts }) => {
     const [users, setUsers] = useState([])
     const [categories, setCategories] = useState([])
+    const [tags, setTags] = useState([])
     const [categoryFilter, setCategoryFilter] = useState(0)
+    const [tagFilter, setTagFilter] = useState([])
     const [authorFilter, setAuthorFilter] = useState(0)
+    const [titleFilter, setTitleFilter] = useState('')
 
     useEffect(() => {
         getCategories().then(setCategories)
         getAllUsers().then(setUsers)
         getCategories().then(setCategories)
+        getTags().then(setTags)
     }, [])
+
+    const checkboxOnChange = () => {
+        const checkboxes = document.querySelectorAll('input[type=checkbox]')
+        let tagsArr = []
+        for (const box of checkboxes) {
+            if (box.checked) {
+                tagsArr.push(parseInt(box.value))
+            }
+        }
+        setTagFilter(tagsArr)
+    }
+
+    const handleSearchInput = (evt) => {
+        setTitleFilter(evt.target.value)
+        searchByTitle(titleFilter)
+        .then(syncPosts)
+    }
+
 
     return (
         <>
@@ -56,6 +80,22 @@ export const PostList = ({ posts, syncPosts }) => {
                     ))}
                 </select>
             </div>
+            <div className="filterSelect">
+                <input id="title" onChange={handleSearchInput}
+                    name="label"
+                    placeholder="Search by title.."
+                    type="text"
+                    className="labelFilterInput"
+                />
+            </div>
+            {tags.map((tag, i) => (
+                <div className="w-full sm:w-auto" key={i}>
+                    <label className="flex content-center p-3">
+                        <input type="checkbox" name={tag.label} value={tag.id} onChange={checkboxOnChange} />
+                        <span className="ml-3">{tag.label}</span>
+                    </label>
+                </div>
+            ))}
             <table className="table">
                 <thead>
                     <tr>
@@ -69,8 +109,8 @@ export const PostList = ({ posts, syncPosts }) => {
                 {
                     posts.map(
                         (post) => {
-                            if (categoryFilter !== 0 && authorFilter !== 0) {
-                                if (post.category.id === categoryFilter && post.user.id === authorFilter) {
+                            if (categoryFilter !== 0 && authorFilter !== 0 && titleFilter !== '') {
+                                if (post.category.id === categoryFilter && post.user.id === authorFilter && post.title === titleFilter) {
                                     return <Post
                                         key={post.id}
                                         postId={post.id}
@@ -86,7 +126,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                     />
                                 }
                             } else {
-                                if (post.category.id === categoryFilter || post.user.id === authorFilter) {
+                                if (post.category.id === categoryFilter || post.user.id === authorFilter || post.title === titleFilter) {
                                     return <Post
                                         key={post.id}
                                         postId={post.id}
@@ -99,7 +139,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         tags={post.tags}
                                         reactionCount={post.reactions}
                                     />
-                                } else if (categoryFilter === 0 && authorFilter === 0) {
+                                } else if (categoryFilter === 0 && authorFilter === 0 && titleFilter === '') {
                                     return <Post
                                         key={post.id}
                                         postId={post.id}
