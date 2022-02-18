@@ -29,15 +29,26 @@ export const ReactionList = ({ postId, reactionCount, syncPosts }) => {
                 <a className="like-btn">
                     <div>
                         {
-                            reactions.map(
-                                (reaction) => {
-                                    for (const count of reactionCount) {
-                                        if (count.label === reaction.label) {
-                                            return <div onClick={() => changePostReactionState(reaction.id)} value={reaction.id} key={`reaction__${reaction.id}`} ><img style={{ width: "10%" }} src={reaction.image_url} className="reaction-icon" />{count.count}</div>
+                            reactionCount ?
+                                reactions.map(
+                                    (reaction) => {
+                                        for (const count of reactionCount) {
+                                            if (count.label === reaction.label) {
+                                                return (
+                                                    <span
+                                                        onClick={() => changePostReactionState(reaction.id)}
+                                                        value={reaction.id} key={`reaction__${reaction.id}`} >
+                                                        <img style={{ width: "40px", marginRight: "10px" }}
+                                                            src={reaction.image_url}
+                                                            className="reaction-icon"
+                                                        />{count.count}
+                                                    </span>
+                                                )
+                                            }
                                         }
                                     }
-                                }
-                            )
+                                )
+                                : ""
                         }
                     </div>
                 </a>

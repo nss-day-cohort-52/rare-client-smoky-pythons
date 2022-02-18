@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Route } from "react-router-dom"
 import { PostsRepository } from "../repositories/PostsRepository"
-import { EditCategory } from "./categories/edit_category"
+import { EditCategory } from "./categories/EditCategory"
 import { EditComment } from "./posts/EditComment"
 import { MyPostList } from "./posts/MyPost"
 import { PostCommentForm } from "./posts/PostCommentForm"
@@ -12,7 +12,7 @@ import { PostForm } from "./posts/PostEntry"
 import { PostList } from "./posts/PostList"
 import { ReactionForm } from "./reactions/ReactionForm"
 import { Subscriptions } from "./subscriptions/Subscriptions"
-import { EditTag } from "./tags/edit_tag"
+import { EditTags } from "./tags/EditTags"
 
 
 export const PostRoutes = () => {
@@ -49,9 +49,9 @@ export const PostRoutes = () => {
             <Route path = "/my-post">
                 <MyPostList posts={posts} syncPosts={syncPosts} />
             </Route>
-            {/* <Route exact path = "/">
+            <Route exact path = "/">
                 <Subscriptions posts={posts} syncPosts={syncPosts} />
-            </Route> */}
+            </Route>
             <Route exact path = "/editPost/:postId(\d+)">
                 <EditPost posts={posts} syncPosts={syncPosts}/>
             </Route>
@@ -59,7 +59,7 @@ export const PostRoutes = () => {
                 <EditCategory/>
             </Route>
             <Route exact path = "/tags/edit/:TagId(\d+)">
-                <EditTag/>
+                <EditTags/>
             </Route>
             <Route exact path = "/newReaction">
                 <ReactionForm/>

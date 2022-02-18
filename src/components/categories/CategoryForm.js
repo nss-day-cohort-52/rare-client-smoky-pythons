@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { FetchOptions } from "../utils/FetchOptions";
 
-export const CategoryForm = ({syncCategories}) => {
+export const CategoryForm = ({ syncCategories }) => {
     const [category, modifyCategory] = useState({
         label: ""
     })
@@ -11,18 +11,17 @@ export const CategoryForm = ({syncCategories}) => {
             label: category.label
         }
         return fetch(`http://localhost:8000/categories`, FetchOptions("POST", newCategory))
-        .then(syncCategories)
-        .then(modifyCategory(newCategory))
+            .then(syncCategories)
+            .then(modifyCategory({ label: "" }))
     }
-
-    // const emptyLabel = {label: ""}
 
     return (
         <>
-        <div className="card">
-            <h1 className="label is-medium">New Category</h1>
-            <div className="description">
+            <div className="card">
+                <h1 className="label is-medium">New Category</h1>
+                <div className="description">
                     <input
+                        value={category.label}
                         onChange={
                             (evt) => {
                                 const copy = { ...category }
@@ -44,7 +43,7 @@ export const CategoryForm = ({syncCategories}) => {
                     }>
                     Submit
                 </button>
-        </div>
+            </div>
         </>
     )
 }

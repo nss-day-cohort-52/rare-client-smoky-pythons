@@ -1,10 +1,10 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { CategoryList } from "./categories/category_list"
+import { CategoryList } from "./categories/CategoryList"
 import { UsersList } from "./users/UsersList"
 import { UserDetails } from "./users/UserDetails"
 import { PostRoutes } from "./PostRoutes"
-import { TagList } from "./tags/tag_list"
+import { TagList } from "./tags/TagList"
 
 
 
@@ -23,7 +23,7 @@ export const ApplicationViews = () => {
       <UsersList/>
     </Route>
 
-    <Route path = "/users/:user_id(\d+)">
+    <Route path = "/users/:userId(\d+)">
       <UserDetails/>
     </Route>
 

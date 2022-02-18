@@ -1,8 +1,7 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
-import "./Post.css"
 import { PostsRepository } from "../../repositories/PostsRepository.js"
-import { ReactionList } from "../reactions/ReactionList.js"
-// import { ReactionCount } from "../reactions/ReactionCount"
+import "./Post.css"
+
 export const Post = (props) => {
     const history = useHistory()
 
@@ -22,33 +21,36 @@ export const Post = (props) => {
                     <td>{props.category?.label}</td>
                     <td>
                         {
-                            props.tags.map(tag => {
+                            props.tags?.map(tag => {
                                 return (
                                     <div key={tag.id}>{tag.label}</div>
                                 )
                             })
                         }
                     </td>
-                    <td>
-                        <button
-                            onClick={() => {
-                                if (confirm('Are you sure you want to delete this post?') == true)
-                                    deletePost(props.postId)
-                            }
-                            }>Delete</button>
-                    </td>
-                    <td>
-                        <button
-                            onClick={() => {
-                                history.push(`/editPost/${props.postId}`)
-                            }}>Edit</button>
-                    </td>
-                    {/* <td>
-                        <ReactionCount postId = {props.postId} />
-                    </td> */}
-                    <td>
-                        <ReactionList postId = {props.postId} reactionCount={props.reactionCount} syncPosts={props.syncPosts}/>
-                    </td>
+                    {
+                        props.isOwner
+                            ?
+                            <>
+                                <td>
+                                    <button
+                                        className="button"
+                                        onClick={() => {
+                                            if (confirm('Are you sure you want to delete this post?') == true)
+                                                deletePost(props.postId)
+                                        }
+                                        }>Delete</button>
+                                </td>
+                                <td>
+                                    <button
+                                        className="button"
+                                        onClick={() => {
+                                            history.push(`/editPost/${props.postId}`)
+                                        }}>Edit</button>
+                                </td>
+                            </>
+                            : null
+                    }
                 </tr>
             </tbody>
         </>

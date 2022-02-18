@@ -4,8 +4,7 @@ import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
-import { Subscriptions } from "./subscriptions/Subscriptions"
-
+import "./Rare.css"
 export const Rare = () => {
   const [token, setTokenState] = useState(localStorage.getItem('token'))
   const [isStaff, setIsStaff] = useState(localStorage.getItem('isStaff'))
@@ -14,9 +13,9 @@ export const Rare = () => {
     localStorage.setItem('token', newToken)
     setTokenState(newToken)
   }
-  const setStaffOption = (boolean) => {
-    localStorage.setItem('isStaff', boolean)
-    setIsStaff(boolean)
+  const setStaffOption = (value) => {
+    localStorage.setItem('isStaff', value)
+    setIsStaff(value)
   }
 
   return <>
@@ -26,7 +25,6 @@ export const Rare = () => {
         <Route>
           <NavBar token={token} setToken={setToken} />
           <ApplicationViews />
-          {/* <Subscriptions /> */}
         </Route>
         :
         <Redirect to="/login" />
@@ -38,7 +36,7 @@ export const Rare = () => {
     </Route>
 
     <Route path="/register" exact>
-      <NavBar token={token} setToken={setToken} />
+      <NavBar setStaffOption={setStaffOption} token={token} setToken={setToken} />
       <Register token={token} setToken={setToken} />
     </Route>
   </>

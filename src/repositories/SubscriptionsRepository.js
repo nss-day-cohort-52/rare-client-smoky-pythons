@@ -1,23 +1,13 @@
+import { FetchOptions } from "../components/utils/FetchOptions";
+import { Settings } from "../components/utils/Settings";
 
-
-
-
-
-export const getUserSubs = (id) =>{
-       return fetch(`http://localhost:8000/subscriptions/${id}`)
-      .then(res => res.json())}
-
-export const addToSubList = (subObj) => {
-      return fetch(`http://localhost:8000/subscriptions`,{
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(subObj)
-    })
+export const getUserSubs = () => {
+  return fetch(`http://localhost:8000/subscriptions/usersubs`, FetchOptions())
+    .then(res => res.json())
 }
-  export const deleteSubscription = subId => {
-    return fetch(`http://localhost:8000/subscriptions/${subId}`, {
-      method: "DELETE"
-    })
-  };
+export const addToSubList = (subObj) => {
+  return fetch(`http://localhost:8000/subscriptions`, FetchOptions("POST", subObj))
+}
+export const deleteSubscription = subId => {
+  return fetch(`http://localhost:8000/subscriptions/${subId}`, FetchOptions("DELETE"))
+}

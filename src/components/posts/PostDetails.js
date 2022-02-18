@@ -1,45 +1,60 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
-import { getTags } from "../../repositories/TagsRepository"
 import { useParams, Link } from "react-router-dom"
-import { get_all_users } from "../../repositories/UserRepository"
-import "./PostDetails.css"
 import { PostsRepository } from "../../repositories/PostsRepository"
+import { ReactionList } from "../reactions/ReactionList"
+import "./PostDetails.css"
 
-export const PostDetails = ({ posts, syncPosts }) => {
+export const PostDetails = () => {
     const { postId } = useParams()
     const [post, setPost] = useState({})
     const history = useHistory()
 
-useEffect(() => {
-    PostsRepository.getOne(postId).then(setPost)
-}, [postId])
+    const syncPost = () => {
+        PostsRepository.getOne(postId)
+            .then(setPost)
+    }
 
-const username = post.user?.user?.username
+    useEffect(() => {
+        syncPost()
+    }, [postId])
 
-return (
-    <div className="post-detail-container">
-        <div className="post-category">{post.category?.label}</div>
-        <h2 className="subtitle post-title">{post.title}</h2>
-        <div className="author-and-tags">
-            <div><Link to={`/users/${post.user?.id}`}>{username}</Link></div>
-            <div className="tags-container">
+    const username = post.user?.user?.username
+
+    return (
+        <div className="post-detail-container">
+            <div className="post-category">{post.category?.label}</div>
+            <h2 className="subtitle post-title">{post.title}</h2>
+            <div className="author-and-tags">
+                <div><Link to={`/users/${post.user?.id}`}>{username}</Link></div>
+                <div className="tags-container">
+                    {
+                        post.tags?.map(tag => {
+                            return <div key={tag.id}>{tag.label}</div>
+                        })
+                    }
+                </div>
+            </div>
+            <div>{post.publication_date}</div>
+            <div className="card">
+                <div className="card-content">
+                    <div className="content">
+                        {post.content}
+                    </div>
+                </div>
+            </div>
+            <div className="post-detail-btn-container">
+                <ReactionList postId={postId} reactionCount={post.reactions} syncPosts={syncPost} />
                 {
-                    post.tags?.map(tag => {
-                        return <div key={tag.id}>{tag.label}</div>
-                    })
+                    post.is_owner
+                        ?
+                        <>
+                            <button onClick={() => history.push(`${postId}/comments`)} className="button">View comments</button>
+                            <button onClick={() => history.push(`/editPost/${postId}`)} className="button">Manage tags</button>
+                        </>
+                        : ""
                 }
             </div>
         </div>
-        <div>{post.publication_date}</div>
-        <div className="card">
-            <div className="card-content">
-                <div className="content">
-                    {post.content}
-                </div>
-            </div>
-        </div>
-        <button onClick={() => history.push(`${postId}/comments`)} className="button">View comments</button>
-    </div>
-)
+    )
 }

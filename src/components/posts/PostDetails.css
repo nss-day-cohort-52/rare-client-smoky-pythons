@@ -8,3 +8,7 @@
 .post-category {
     float: right;
 }
+.post-detail-btn-container {
+    display: flex;
+    justify-content: space-between;
+}

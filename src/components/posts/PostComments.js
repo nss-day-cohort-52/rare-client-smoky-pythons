@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { CommentsRepository } from "../../repositories/CommentsRepository"
-import { get_all_users } from "../../repositories/UserRepository"
 
 export const PostComments = () => {
     const history = useHistory()
     const { postId } = useParams()
     const [comments, setComments] = useState([])
-    const [users, setUsers] = useState([])
 
     const syncComments = () => {
         CommentsRepository.getAll().then(setComments)
@@ -15,7 +13,6 @@ export const PostComments = () => {
 
     useEffect(() => {
         syncComments()
-        get_all_users().then(setUsers)
     }, [])
 
     const handleDeleteComment = (id) => {
@@ -32,16 +29,21 @@ export const PostComments = () => {
                         <div key={comment.id}>
                             <div>{comment.content}</div>
                             <div>Commented by: {userFullName}</div>
-                            <div>
-                                <button
-                                    className="button"
-                                    onClick={() => handleDeleteComment(comment.id)}
-                                >Delete</button>
-                                <button
-                                    className="button"
-                                    onClick={() => history.push(`/posts/${postId}/comments/${comment.id}/edit`)}
-                                >Edit</button>
-                            </div>
+                            {
+                                comment.is_owner
+                                    ?
+                                    <div>
+                                        <button
+                                            className="button"
+                                            onClick={() => handleDeleteComment(comment.id)}
+                                        >Delete</button>
+                                        <button
+                                            className="button"
+                                            onClick={() => history.push(`/posts/${postId}/comments/${comment.id}/edit`)}
+                                        >Edit</button>
+                                    </div>
+                                    : ""
+                            }
                             --------------------------------------
                         </div>
                     )
