@@ -19,8 +19,8 @@ export const UsersList = () => {
             <article className="users">
                 {
                     users.map(user => {
-                        return <section className="user is-size-5-desktop" key={user.user?.id}>
-                                <Link to={`/users/${user.user?.id}`} >
+                        return <section className="user is-size-5-desktop" key={user.id}>
+                                <Link to={`/users/${user.id}`} >
                                    <h3>{user.user?.first_name} {user.user?.last_name} ({user.user?.username})</h3>
                                 </Link>
                         </section>

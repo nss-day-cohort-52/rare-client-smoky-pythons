@@ -29,16 +29,21 @@ export const PostComments = () => {
                         <div key={comment.id}>
                             <div>{comment.content}</div>
                             <div>Commented by: {userFullName}</div>
-                            <div>
-                                <button
-                                    className="button"
-                                    onClick={() => handleDeleteComment(comment.id)}
-                                >Delete</button>
-                                <button
-                                    className="button"
-                                    onClick={() => history.push(`/posts/${postId}/comments/${comment.id}/edit`)}
-                                >Edit</button>
-                            </div>
+                            {
+                                comment.is_owner
+                                    ?
+                                    <div>
+                                        <button
+                                            className="button"
+                                            onClick={() => handleDeleteComment(comment.id)}
+                                        >Delete</button>
+                                        <button
+                                            className="button"
+                                            onClick={() => history.push(`/posts/${postId}/comments/${comment.id}/edit`)}
+                                        >Edit</button>
+                                    </div>
+                                    : ""
+                            }
                             --------------------------------------
                         </div>
                     )

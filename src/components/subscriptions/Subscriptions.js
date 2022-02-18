@@ -1,23 +1,17 @@
 import { useState, useEffect } from "react"
-import { getAllUsers, getCurrentUser } from "../../repositories/UserRepository"
-import { getUserSubs, addToSubList, deleteSubscription } from "../../repositories/SubscriptionsRepository"
-import { useParams, useHistory } from "react-router-dom"
+import { getUserSubs } from "../../repositories/SubscriptionsRepository"
 import { Post } from "../posts/Post"
-import { getCategories } from "../../repositories/CategoriesRepository"
 
 export const Subscriptions = ({ posts, syncPosts }) => {
-    const [currentUser, setCurrentUser] = useState({})
     const [userSubs, setUserSubs] = useState([])
 
     useEffect(() => {
-        getCurrentUser()
-            .then(setCurrentUser)
         getUserSubs()
             .then(setUserSubs)
     }, [])
 
-    // const message = subs.length > 0 ? postList : "Subscribe to authors to curate your personal homepage"
     const message = "Subscribe to authors to curate your personal homepage"
+    
     if (userSubs.length !== 0) {
         return (
             <table className="table">
@@ -38,14 +32,16 @@ export const Subscriptions = ({ posts, syncPosts }) => {
                             title={post.title}
                             content={post.content}
                             publicationDate={post.publication_date}
-                            user={currentUser}
+                            user={post.user.user}
                             category={post.category}
-                            syncPosts={syncPosts} />
+                            syncPosts={syncPosts}
+                            reactionCount={post.reactions}
+                        />
                     }
                 })}
             </table>
         )
-    } 
+    }
     else {
         return message
     }

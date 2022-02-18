@@ -4,7 +4,6 @@ import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
-import { Subscriptions } from "./subscriptions/Subscriptions"
 
 export const Rare = () => {
   const [token, setTokenState] = useState(localStorage.getItem('token'))
@@ -26,7 +25,6 @@ export const Rare = () => {
         <Route>
           <NavBar token={token} setToken={setToken} />
           <ApplicationViews />
-          {/* <Subscriptions /> */}
         </Route>
         :
         <Redirect to="/login" />
