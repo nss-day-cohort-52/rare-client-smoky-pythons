@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getCategories } from "../../repositories/CategoriesRepository";
-import { CategoryForm } from "./category_form";
+import { CategoryForm } from "./CategoryForm";
 
 
 export const CategoryList = () => {
@@ -24,7 +24,7 @@ export const CategoryList = () => {
                 "Authorization": `Token ${localStorage.getItem("token")}`
             }
         })
-        .then(syncCategories)
+            .then(syncCategories)
     }
 
     return (
@@ -36,20 +36,23 @@ export const CategoryList = () => {
                             return <div key={category.id}>
                                 <p className="subtitle is-size-5-desktop" >{category.label}</p>
                                 <div>
-                                <button
-                                    onClick={
-                                        () => {
-                                            history.push(`/categories/edit/${category.id}`)
+                                    <button
+                                        style={{marginRight: "15px"}}
+                                        className="button"
+                                        onClick={
+                                            () => {
+                                                history.push(`/categories/edit/${category.id}`)
+                                            }
                                         }
-                                    }
-                                >Edit</button>
-                                <button
-                                    onClick={
-                                        () => {
-                                        DeleteCategory(parseInt(category.id))
+                                    >Edit</button>
+                                    <button
+                                        className="button"
+                                        onClick={
+                                            () => {
+                                                DeleteCategory(parseInt(category.id))
+                                            }
                                         }
-                                    }
-                                >Delete</button>
+                                    >Delete</button>
                                 </div>
                             </div>
 

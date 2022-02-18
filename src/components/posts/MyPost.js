@@ -34,6 +34,7 @@ export const MyPostList = ({ posts, syncPosts }) => {
                                         category={post.category}
                                         syncPosts={syncPosts}
                                         tags={post.tags}
+                                        isOwner={post.is_owner}
                                     />
                                 : ""
                         )

@@ -11,7 +11,7 @@ export const Subscriptions = ({ posts, syncPosts }) => {
     }, [])
 
     const message = "Subscribe to authors to curate your personal homepage"
-    
+
     if (userSubs.length !== 0) {
         return (
             <table className="table">
@@ -36,6 +36,8 @@ export const Subscriptions = ({ posts, syncPosts }) => {
                             category={post.category}
                             syncPosts={syncPosts}
                             reactionCount={post.reactions}
+                            tags={post.tags}
+                            isOwner={post.is_owner}
                         />
                     }
                 })}

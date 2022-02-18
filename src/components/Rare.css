@@ -1,0 +1,10 @@
+body {
+    width: 80%;
+    margin: 0 auto;
+}
+div {
+    padding: 5px 15px;
+}
+.card {
+    padding: 5px 15px;
+}

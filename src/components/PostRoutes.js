@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Route } from "react-router-dom"
 import { PostsRepository } from "../repositories/PostsRepository"
-import { EditCategory } from "./categories/edit_category"
+import { EditCategory } from "./categories/EditCategory"
 import { EditComment } from "./posts/EditComment"
 import { MyPostList } from "./posts/MyPost"
 import { PostCommentForm } from "./posts/PostCommentForm"

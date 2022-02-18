@@ -3,7 +3,7 @@ import { Post } from "./Post"
 import { Link } from "react-router-dom"
 import { getAllUsers } from "../../repositories/UserRepository"
 import { getCategories } from "../../repositories/CategoriesRepository"
-
+import "./PostList.css"
 
 export const PostList = ({ posts, syncPosts }) => {
     const [users, setUsers] = useState([])
@@ -24,6 +24,7 @@ export const PostList = ({ posts, syncPosts }) => {
                 <center> <Link to="/newReaction" className="navbar-item button m-3">New Reaction</Link></center>
             </div>
             <div className="filterSelect">
+                <h4 style={{ marginBottom: "10px" }} >Filtering options: </h4>
                 <select id="category" onChange={(event) => {
                     setCategoryFilter(parseInt(event.target.value))
                 }}
@@ -47,7 +48,7 @@ export const PostList = ({ posts, syncPosts }) => {
                     name="author"
                     className="authorFilterDropdown"
                 >
-                    <option key="author--0" value={0}>Author</option>
+                    <option key="author--0" value={0}>All authors</option>
                     {users.map((user) => (
                         <option key={user.id} value={user.id}>
                             {user.user?.first_name} {user.user?.last_name}
@@ -81,6 +82,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         syncPosts={syncPosts}
                                         tags={post.tags}
                                         reactionCount={post.reactions}
+                                        isOwner={post.is_owner}
                                     />
                                 }
                             } else {
@@ -109,6 +111,7 @@ export const PostList = ({ posts, syncPosts }) => {
                                         syncPosts={syncPosts}
                                         tags={post.tags}
                                         reactionCount={post.reactions}
+                                        isOwner={post.is_owner}
                                     />
 
                                 }

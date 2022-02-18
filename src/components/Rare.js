@@ -4,7 +4,7 @@ import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
-
+import "./Rare.css"
 export const Rare = () => {
   const [token, setTokenState] = useState(localStorage.getItem('token'))
   const [isStaff, setIsStaff] = useState(localStorage.getItem('isStaff'))

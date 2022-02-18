@@ -38,7 +38,7 @@ export const ReactionList = ({ postId, reactionCount, syncPosts }) => {
                                                     <span
                                                         onClick={() => changePostReactionState(reaction.id)}
                                                         value={reaction.id} key={`reaction__${reaction.id}`} >
-                                                        <img style={{ width: "50px" }}
+                                                        <img style={{ width: "40px", marginRight: "10px" }}
                                                             src={reaction.image_url}
                                                             className="reaction-icon"
                                                         />{count.count}

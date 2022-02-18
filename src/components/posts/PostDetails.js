@@ -44,9 +44,16 @@ export const PostDetails = () => {
                 </div>
             </div>
             <div className="post-detail-btn-container">
-                <button onClick={() => history.push(`${postId}/comments`)} className="button">View comments</button>
-                <button onClick={() => history.push(`/editPost/${postId}`)} className="button">Manage tags</button>
                 <ReactionList postId={postId} reactionCount={post.reactions} syncPosts={syncPost} />
+                {
+                    post.is_owner
+                        ?
+                        <>
+                            <button onClick={() => history.push(`${postId}/comments`)} className="button">View comments</button>
+                            <button onClick={() => history.push(`/editPost/${postId}`)} className="button">Manage tags</button>
+                        </>
+                        : ""
+                }
             </div>
         </div>
     )
