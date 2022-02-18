@@ -7,14 +7,13 @@ import { getTags } from "../../repositories/TagsRepository"
 import "./PostList.css"
 import { searchByTitle } from "../../repositories/PostsRepository"
 
-export const PostList = ({ posts, syncPosts, isStaff }) => {
+export const PostList = ({ posts, syncPosts, isStaff, titleFilter, setTitleFilter }) => {
     const [users, setUsers] = useState([])
     const [categories, setCategories] = useState([])
     const [tags, setTags] = useState([])
     const [categoryFilter, setCategoryFilter] = useState(0)
     const [tagFilter, setTagFilter] = useState([])
     const [authorFilter, setAuthorFilter] = useState(0)
-    const [titleFilter, setTitleFilter] = useState('')
 
     useEffect(() => {
         getCategories().then(setCategories)
@@ -36,8 +35,6 @@ export const PostList = ({ posts, syncPosts, isStaff }) => {
 
     const handleSearchInput = (evt) => {
         setTitleFilter(evt.target.value)
-        searchByTitle(titleFilter)
-        .then(syncPosts)
     }
 
 
@@ -114,8 +111,8 @@ export const PostList = ({ posts, syncPosts, isStaff }) => {
                 {
                     posts.map(
                         (post) => {
-                            if (categoryFilter !== 0 && authorFilter !== 0 && titleFilter !== '') {
-                                if (post.category.id === categoryFilter && post.user.id === authorFilter && post.title === titleFilter) {
+                            if (categoryFilter !== 0 && authorFilter !== 0) {
+                                if (post.category.id === categoryFilter && post.user.id === authorFilter) {
                                     return <Post
                                         key={post.id}
                                         postId={post.id}
@@ -131,7 +128,7 @@ export const PostList = ({ posts, syncPosts, isStaff }) => {
                                     />
                                 }
                             } else {
-                                if (post.category.id === categoryFilter || post.user.id === authorFilter || post.title === titleFilter) {
+                                if (post.category.id === categoryFilter || post.user.id === authorFilter) {
                                     return <Post
                                         key={post.id}
                                         postId={post.id}
@@ -144,7 +141,7 @@ export const PostList = ({ posts, syncPosts, isStaff }) => {
                                         tags={post.tags}
                                         reactionCount={post.reactions}
                                     />
-                                } else if (categoryFilter === 0 && authorFilter === 0 && titleFilter === '') {
+                                } else if (categoryFilter === 0 && authorFilter === 0) {
                                     return <Post
                                         key={post.id}
                                         postId={post.id}

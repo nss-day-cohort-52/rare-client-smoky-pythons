@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Route } from "react-router-dom"
-import { PostsRepository } from "../repositories/PostsRepository"
+import { PostsRepository, searchByTitle } from "../repositories/PostsRepository"
 import { HomePage } from "./home/HomePage"
 import { CategoryRoutes } from "./routes/CategoryRoutes"
 import { PostRoutes } from "./routes/PostRoutes"
@@ -13,14 +13,19 @@ import { CommentRoutes } from "./routes/CommentRoutes"
 
 export const ApplicationViews = ({ isStaff }) => {
   const [posts, setPosts] = useState([])
+  const [titleFilter, setTitleFilter] = useState('')
 
   const syncPosts = () => {
-    PostsRepository.getAll().then(setPosts)
+    if (titleFilter !== '') {
+      searchByTitle(titleFilter).then(setPosts)
+    } else {
+      PostsRepository.getAll().then(setPosts)
+    }
   }
 
   useEffect(() => {
     syncPosts()
-  }, [])
+  }, [titleFilter])
 
   return (
     <>
@@ -29,7 +34,7 @@ export const ApplicationViews = ({ isStaff }) => {
         <HomePage posts={posts} syncPosts={syncPosts} />
       </Route>
 
-      <PostRoutes posts={posts} syncPosts={syncPosts} isStaff={isStaff} />
+      <PostRoutes posts={posts} syncPosts={syncPosts} isStaff={isStaff} titleFilter={titleFilter} setTitleFilter={setTitleFilter} />
 
       <UserRoutes />
 
