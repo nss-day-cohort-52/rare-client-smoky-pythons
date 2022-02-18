@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { getUserSubs } from "../../repositories/SubscriptionsRepository"
 import { Post } from "../posts/Post"
 
-export const Subscriptions = ({ posts, syncPosts }) => {
+export const HomePage = ({ posts, syncPosts }) => {
     const [userSubs, setUserSubs] = useState([])
 
     useEffect(() => {

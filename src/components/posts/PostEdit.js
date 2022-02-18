@@ -5,7 +5,7 @@ import { getSinglePost, PostsRepository } from "../../repositories/PostsReposito
 import { getTags } from "../../repositories/TagsRepository"
 
 
-export const EditPost = ({ posts, syncPosts }) => {
+export const PostEdit = ({ posts, syncPosts }) => {
 
     const history = useHistory()
     const [categories, setCategories] = useState([])

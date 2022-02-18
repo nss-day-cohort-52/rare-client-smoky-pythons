@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { Post } from "./Post"
 
-export const MyPostList = ({ posts, syncPosts }) => {
+export const MyPosts = ({ posts, syncPosts }) => {
 
     return (
         <>
@@ -36,7 +36,7 @@ export const MyPostList = ({ posts, syncPosts }) => {
                                         tags={post.tags}
                                         isOwner={post.is_owner}
                                     />
-                                : ""
+                                : null
                         )
                     })
                 }

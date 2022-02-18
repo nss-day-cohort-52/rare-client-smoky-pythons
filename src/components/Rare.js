@@ -24,7 +24,7 @@ export const Rare = () => {
         ?
         <Route>
           <NavBar token={token} setToken={setToken} />
-          <ApplicationViews />
+          <ApplicationViews isStaff={isStaff} />
         </Route>
         :
         <Redirect to="/login" />

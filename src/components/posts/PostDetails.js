@@ -19,14 +19,14 @@ export const PostDetails = () => {
         syncPost()
     }, [postId])
 
-    const username = post.user?.user?.username
-
+    const fullName = `${post.user?.user?.first_name} ${post.user?.user?.last_name}`
+    const username = `@${post.user?.user?.username}`
     return (
         <div className="post-detail-container">
             <div className="post-category">{post.category?.label}</div>
             <h2 className="subtitle post-title">{post.title}</h2>
             <div className="author-and-tags">
-                <div><Link to={`/users/${post.user?.id}`}>{username}</Link></div>
+                <div><Link to={`/users/${post.user?.id}`}>{fullName}</Link></div>
                 <div className="tags-container">
                     {
                         post.tags?.map(tag => {
@@ -44,16 +44,14 @@ export const PostDetails = () => {
                 </div>
             </div>
             <div className="post-detail-btn-container">
-                <ReactionList postId={postId} reactionCount={post.reactions} syncPosts={syncPost} />
+                <ReactionList postId={postId} post={post} reactionCount={post.reactions} syncPost={syncPost} />
                 {
                     post.is_owner
                         ?
-                        <>
-                            <button onClick={() => history.push(`${postId}/comments`)} className="button">View comments</button>
-                            <button onClick={() => history.push(`/editPost/${postId}`)} className="button">Manage tags</button>
-                        </>
-                        : ""
+                        <button onClick={() => history.push(`/editPost/${postId}`)} className="button">Manage tags</button>
+                        : null
                 }
+                <button onClick={() => history.push(`${postId}/comments`)} className="button">View comments</button>
             </div>
         </div>
     )
