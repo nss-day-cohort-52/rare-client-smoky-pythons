@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { Post } from "./Post"
 import { Link } from "react-router-dom"
-import { getAllUsers } from "../../repositories/UserRepository"
+import { getAllUsers, getCurrentUser } from "../../repositories/UserRepository"
 import { getCategories } from "../../repositories/CategoriesRepository"
 import "./PostList.css"
 
-export const PostList = ({ posts, syncPosts }) => {
+export const PostList = ({ posts, syncPosts, isStaff }) => {
     const [users, setUsers] = useState([])
     const [categories, setCategories] = useState([])
     const [categoryFilter, setCategoryFilter] = useState(0)
@@ -21,7 +21,12 @@ export const PostList = ({ posts, syncPosts }) => {
         <>
             <div>
                 <center> <Link to="/newPost" className="navbar-item button m-3">New Post</Link></center>
-                <center> <Link to="/newReaction" className="navbar-item button m-3">New Reaction</Link></center>
+                {
+                    isStaff
+                        ?
+                        <center> <Link to="/newReaction" className="navbar-item button m-3">New Reaction</Link></center>
+                        : ""
+                }
             </div>
             <div className="filterSelect">
                 <h4 style={{ marginBottom: "10px" }} >Filtering options: </h4>

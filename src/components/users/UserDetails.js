@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { getCurrentUser, getSingleUser, subscribe, unSubscribe } from "../../repositories/UserRepository"
-import { getUserSubs, addToSubList, deleteSubscription } from "../../repositories/SubscriptionsRepository"
-import { useParams, useHistory } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 export const UserDetails = () => {
     const { userId } = useParams()
@@ -51,10 +50,11 @@ export const UserDetails = () => {
 
     return (
         <section className="user">
-            <h3 className="user__username">{selectedUser.user?.username}</h3>
             <div className="user__name">{selectedUser.user?.first_name} {selectedUser.user?.last_name}</div>
+            <h3 className="user__username">{`@${selectedUser.user?.username}`}</h3>
             <div className="user__date">Joined: {selectedUser.created_on}</div>
             <div className="user__bio">Bio: {selectedUser.bio}</div>
+            <div className="user__sub-count"># of subscribers: {selectedUser.subscriber_count}</div>
             {displaySubscribeButton}
         </section>
     )

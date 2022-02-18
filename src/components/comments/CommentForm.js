@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min"
 import { CommentsRepository } from "../../repositories/CommentsRepository"
 
-export const PostCommentForm = () => {
+export const CommentForm = () => {
     const history = useHistory()
     const { postId } = useParams()
     const [comment, updateComment] = useState({

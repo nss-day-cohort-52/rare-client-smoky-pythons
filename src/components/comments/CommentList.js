@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import { CommentsRepository } from "../../repositories/CommentsRepository"
 
-export const PostComments = () => {
+export const CommentList = () => {
     const history = useHistory()
     const { postId } = useParams()
     const [comments, setComments] = useState([])
