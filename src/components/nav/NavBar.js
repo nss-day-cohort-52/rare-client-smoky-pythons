@@ -33,11 +33,11 @@ export const NavBar = ({ token, setToken, setStaffOption }) => {
             token
               ?
               <>
-                <Link to="/posts" className="navbar-item">Posts</Link>
-                <Link to="/categories" className="navbar-item">Category Manager</Link>
-                <Link to="/users" className="navbar-item">User Management</Link>
-                <Link to="/tags" className="navbar-item">Tag Manager</Link>
-                <Link to="/my-post" className="navbar-item">My Posts</Link>
+                <Link to="/posts" className="navbar-item" onClick={showMobileNavbar}>Posts</Link>
+                <Link to="/categories" className="navbar-item" onClick={showMobileNavbar}>Category Manager</Link>
+                <Link to="/users" className="navbar-item" onClick={showMobileNavbar}>User Management</Link>
+                <Link to="/tags" className="navbar-item" onClick={showMobileNavbar}>Tag Manager</Link>
+                <Link to="/my-post" className="navbar-item" onClick={showMobileNavbar}>My Posts</Link>
               </>
               :
               ""
@@ -51,8 +51,8 @@ export const NavBar = ({ token, setToken, setStaffOption }) => {
                 token
                   ?
                   <button className="button is-outlined" onClick={() => {
-                    localStorage.removeItem('token')
-                    localStorage.removeItem('isStaff')
+                    setToken("")
+                    // setStaffOption("")
                     history.push('/login')
                   }}>Logout</button>
                   :
