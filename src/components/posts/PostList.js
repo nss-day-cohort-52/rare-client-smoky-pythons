@@ -3,19 +3,40 @@ import { Post } from "./Post"
 import { Link } from "react-router-dom"
 import { getAllUsers, getCurrentUser } from "../../repositories/UserRepository"
 import { getCategories } from "../../repositories/CategoriesRepository"
+import { getTags } from "../../repositories/TagsRepository"
 import "./PostList.css"
+import { searchByTitle } from "../../repositories/PostsRepository"
 
-export const PostList = ({ posts, syncPosts, isStaff }) => {
+export const PostList = ({ posts, syncPosts, isStaff, titleFilter, setTitleFilter }) => {
     const [users, setUsers] = useState([])
     const [categories, setCategories] = useState([])
+    const [tags, setTags] = useState([])
     const [categoryFilter, setCategoryFilter] = useState(0)
+    const [tagFilter, setTagFilter] = useState([])
     const [authorFilter, setAuthorFilter] = useState(0)
 
     useEffect(() => {
         getCategories().then(setCategories)
         getAllUsers().then(setUsers)
         getCategories().then(setCategories)
+        getTags().then(setTags)
     }, [])
+
+    const checkboxOnChange = () => {
+        const checkboxes = document.querySelectorAll('input[type=checkbox]')
+        let tagsArr = []
+        for (const box of checkboxes) {
+            if (box.checked) {
+                tagsArr.push(parseInt(box.value))
+            }
+        }
+        setTagFilter(tagsArr)
+    }
+
+    const handleSearchInput = (evt) => {
+        setTitleFilter(evt.target.value)
+    }
+
 
     return (
         <>
@@ -61,6 +82,22 @@ export const PostList = ({ posts, syncPosts, isStaff }) => {
                     ))}
                 </select>
             </div>
+            <div className="filterSelect">
+                <input id="title" onChange={handleSearchInput}
+                    name="label"
+                    placeholder="Search by title.."
+                    type="text"
+                    className="labelFilterInput"
+                />
+            </div>
+            {tags.map((tag, i) => (
+                <div className="w-full sm:w-auto" key={i}>
+                    <label className="flex content-center p-3">
+                        <input type="checkbox" name={tag.label} value={tag.id} onChange={checkboxOnChange} />
+                        <span className="ml-3">{tag.label}</span>
+                    </label>
+                </div>
+            ))}
             <table className="table">
                 <thead>
                     <tr>

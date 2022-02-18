@@ -6,11 +6,11 @@ import { PostEdit } from "../posts/PostEdit"
 import { Route } from "react-router-dom"
 
 
-export const PostRoutes = ({ posts, syncPosts, isStaff }) => {
+export const PostRoutes = ({ posts, syncPosts, isStaff, titleFilter, setTitleFilter }) => {
     return (
         <>
             <Route exact path={["/posts"]}>
-                <PostList isStaff={isStaff} posts={posts} syncPosts={syncPosts} />
+                <PostList isStaff={isStaff} posts={posts} syncPosts={syncPosts} titleFilter={titleFilter} setTitleFilter={setTitleFilter}/>
             </Route>
             <Route exact path="/posts/:postId(\d+)">
                 <PostDetails posts={posts} syncPosts={syncPosts} />

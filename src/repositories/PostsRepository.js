@@ -37,3 +37,8 @@ export const getSinglePost = (id) => {
     return fetch(`http://localhost:8000/posts/${id}`, FetchOptions())
         .then(res => res.json())
 }
+
+export const searchByTitle = (search_text) => {
+    return fetch(`http://localhost:8000/posts?q=${search_text}`, FetchOptions())
+        .then(res => res.json())
+}
